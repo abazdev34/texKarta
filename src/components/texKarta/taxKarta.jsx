@@ -19,6 +19,7 @@ const TexKarta = () => {
         'фаршМариновый',
         'специФарш',
         'соусТако',
+        'соусЧипотило',
         'пико',
         'фасоловаяПаста',
         'фасалВаренный',
@@ -48,10 +49,10 @@ const TexKarta = () => {
         let total = 0;
 
         // Check if the selected dish is Guacamole
-        if (selectedDish === 'Гуакамоле') {
-            calculatedIngredients['авокадо'] = 200; // Set avocado to 200
-            total += 200; // Update total weight
-        }
+        // if (selectedDish === 'Гуакамоле') {
+        //     calculatedIngredients['авокадо'] = 200; // Set avocado to 200
+        //     total += 200; // Update total weight
+        // }
 
         for (const key in ingredients) {
             const weight = ingredients[key] * multiplier;

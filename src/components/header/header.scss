@@ -1,0 +1,21 @@
+#header{
+	position: sticky;
+	top: 0;
+	background-color: #fff;
+	z-index: 1;	
+		.header{
+			display: flex;
+			// justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+			&__log{
+				width: 60px;
+			}
+			&__nav{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 20px;
+			}
+		}
+	}
