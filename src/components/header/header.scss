@@ -13,12 +13,16 @@
   }
 
   .menu {
-    display: flex;
+    display: none; // Hide menu by default
     list-style: none;
     transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+
+    &.open {
+      display: block; // Show menu when open
+    }
 
     ul {
-      display: flex;
       margin: 0;
       padding: 0;
 
@@ -34,10 +38,6 @@
         }
       }
     }
-
-    &.open {
-      display: block; // Show menu when open
-    }
   }
 
   .menu-toggle {
@@ -46,11 +46,7 @@
     color: white;
     font-size: 24px;
     cursor: pointer;
-    display: none; // Hide by default
-
-    @media (max-width: 768px) {
-      display: block; // Show on mobile
-    }
+    display: block; // Show on all devices
   }
 }
 
@@ -65,6 +61,10 @@
     right: 0;
     background-color: #4CAF50;
     z-index: 1000;
+
+    &.open {
+      display: flex; // Show menu when open
+    }
 
     ul {
       flex-direction: column;
