@@ -10,7 +10,7 @@ const TexKarta = () => {
     const [customPrices, setCustomPrices] = useState({}); // State for custom prices
 
     const quickSelectDishes = [
-			'ЧикенСлайдер',
+			
         'курицаМ',
         'полировка',
         'специКурица',
