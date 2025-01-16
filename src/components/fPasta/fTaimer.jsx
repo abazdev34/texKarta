@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import './fasol.scss';
-
-import beepSound from '../../assets/zvuk6.mp3'; // Файлдын туура жолун көрсөтүңүз
+import beepSound from '../../assets/zvuk6.mp3'; // Таймер үчүн үн
+import finishSound from '../../assets/finish.mp3'; // Блюдо даяр болгондо ойнолуучу үн
 
 const Timer = () => {
   const [timeLeft, setTimeLeft] = useState(15 * 60);
@@ -9,20 +9,21 @@ const Timer = () => {
   const [activeStep, setActiveStep] = useState(null);
   const [isSoundEnabled, setSoundEnabled] = useState(true);
 
-  const beep = new Audio(beepSound); // Импорттолгон үн файлын колдонуу
+  const beep = new Audio(beepSound); // Импорттолгон үн файлы
+  const finishBeep = new Audio(finishSound); // Блюдо даяр болгондо ойнолуучу үн
 
   const steps = [
     { time: 14.93, action: 'приготовти индогцтной плита 3500 градуAсов', type: 'plate' },
     { time: 14.83, action: 'Добавьте масло (150г)', type: 'oil' },
-    { time: 14, action: 'Добавьте лук (200г)', type: 'onion' },
+    { time: 14, action: 'Добавьте лук (250г)', type: 'onion' },
     { time: 13, action: 'Добавьте болгарский перец (400г)', type: 'pepper' },
     { time: 10, action: 'Добавьте помидоры (500г)', type: 'tomato' },
     { time: 8.3, action: 'приготовти индогцтной плита 2000 градусов ', type: 'fry' },
-    { time:8, action: 'Добавьте томатную пасту (200г)   ', type: 'paste' },
+    { time: 8, action: 'Добавьте томатную пасту (200г)', type: 'paste' },
     { time: 6, action: 'Добавьте воду (400г)', type: 'water' },
     { time: 5, action: 'Добавьте соль (20г)', type: 'salt' },
-		{time: 4, action: 'Добавьте соусШрирача(20г)', type: 'sriraСhasauce'},
-    { time: 3, action: 'Добавьте фасоль (2кг)', type: 'beans' },
+    { time: 4, action: 'Добавьте соус Шрирача (120г)', type: 'sriraСhasauce' },
+    { time: 3, action: 'Добавьте фасоль (2,5кг)', type: 'beans' },
     { time: 0, action: 'Блюдо готово!', type: 'done' }
   ];
 
@@ -32,6 +33,12 @@ const Timer = () => {
       interval = setInterval(() => {
         setTimeLeft(time => time - 1);
       }, 1000);
+    } else if (timeLeft === 0) {
+      // Блюдо даяр болгондо башка үн ойнотуу
+      if (isSoundEnabled) {
+        finishBeep.play();
+      }
+      setIsRunning(false); // Таймерди токтотуу
     }
     return () => clearInterval(interval);
   }, [isRunning, timeLeft]);
@@ -39,7 +46,7 @@ const Timer = () => {
   useEffect(() => {
     const minutes = timeLeft / 60;
     const step = steps.find(s => s.time === Math.floor(minutes * 100) / 100);
-    
+
     if (step) {
       setActiveStep(step.type);
       if (isSoundEnabled) {
@@ -127,6 +134,7 @@ const Timer = () => {
                 timer__step
                 ${isCompleted ? 'timer__step--completed' : ''}
                 ${isActive ? 'timer__step--active' : ''}
+                ${timeLeft === 0 ? 'timer__step--finished' : ''} // Кызылга өзгөртүү
               `}
             >
               <div className="timer__step-time">{step.time} мин</div>

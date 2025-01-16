@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ingredientsData } from './index.jsx';
+import './texkarta.scss'; // Импортируем SCSS файл
 
 const TexKarta = () => {
     const [selectedDish, setSelectedDish] = useState('');
@@ -7,24 +8,24 @@ const TexKarta = () => {
     const [totalWeight, setTotalWeight] = useState(0);
     const [multiplier, setMultiplier] = useState(1);
     const [isCalculating, setIsCalculating] = useState(false);
-    const [customPrices, setCustomPrices] = useState({}); // State for custom prices
+    const [customPrices, setCustomPrices] = useState({});
 
     const quickSelectDishes = [
-			
-        'курицаМ',
-        'полировка',
-        'специКурица',
-        'курицаМаринад',
-        'рисЗапровка',
-        'фаршМариновый',
-        'специФарш',
-        'соусТако',
-        'соусЧипотило',
-        'пико',
-        'фасоловаяПаста',
-        'фасалВаренный',
-        'овошиЖарыных',
-        'Гуакамоле'
+        { name: 'курицаМ', category: 'main-dish' },
+        { name: 'специКурица', category: 'main-dish' },
+        { name: 'фаршМариновый', category: 'main-dish' },
+        { name: 'специФарш', category: 'main-dish' },
+        { name: 'полировка', category: 'side' },
+        { name: 'пико', category: 'side' },
+        { name: 'овошиЖарыных', category: 'side' },
+        { name: 'рисЗапровка', category: 'side' },
+        { name: 'соусОстырыйЧили', category: 'sauce' },
+        { name: 'соусТако', category: 'sauce' },
+        { name: 'соусЧипотило', category: 'sauce' },
+        { name: 'МаринадСоусЧипотило', category: 'sauce' },
+        { name: 'фасоловаяПаста', category: 'side' },
+        { name: 'фасалВаренный', category: 'side' },
+        { name: 'Гуакамоле', category: 'side' },
     ];
 
     const handleDishSelect = (dish) => {
@@ -32,7 +33,7 @@ const TexKarta = () => {
     };
 
     const handlePriceChange = (ingredient, price) => {
-        setCustomPrices(prev => ({ ...prev, [ingredient]: price }));
+        setCustomPrices((prev) => ({ ...prev, [ingredient]: price }));
     };
 
     const calculateIngredients = () => {
@@ -40,19 +41,13 @@ const TexKarta = () => {
         const ingredients = ingredientsData[selectedDish];
 
         if (!ingredients) {
-            alert('Тамак тандалган жок.');
+            alert('Блюдо не выбрано.');
             setIsCalculating(false);
             return;
         }
 
         const calculatedIngredients = {};
         let total = 0;
-
-        // Check if the selected dish is Guacamole
-        // if (selectedDish === 'Гуакамоле') {
-        //     calculatedIngredients['авокадо'] = 200; // Set avocado to 200
-        //     total += 200; // Update total weight
-        // }
 
         for (const key in ingredients) {
             const weight = ingredients[key] * multiplier;
@@ -68,8 +63,8 @@ const TexKarta = () => {
     const calculateTotalCost = () => {
         if (!result) return 0;
         return Object.entries(result).reduce((total, [ingredient, weight]) => {
-            const price = customPrices[ingredient] || 0; // Get custom price or default to 0
-            return total + (price * weight);
+            const price = customPrices[ingredient] || 0;
+            return total + price * weight;
         }, 0);
     };
 
@@ -77,13 +72,13 @@ const TexKarta = () => {
         <div className='ingredient-calculator'>
             <h1>Техкарта заготовок</h1>
             <div className='quick-select'>
-                {quickSelectDishes.map((dish) => (
+                {quickSelectDishes.map(({ name, category }) => (
                     <button
-                        key={dish}
-                        onClick={() => handleDishSelect(dish)}
-                        className={selectedDish === dish ? 'active' : ''}
+                        key={name}
+                        onClick={() => handleDishSelect(name)}
+                        className={`dish-category ${category} ${selectedDish === name ? 'active' : ''} ${category === 'main-dish' ? 'main-dish' : ''}`}
                     >
-                        {dish}
+                        {name}
                     </button>
                 ))}
             </div>
@@ -91,7 +86,7 @@ const TexKarta = () => {
             <div className='input-container'>
                 <input
                     type='number'
-                    placeholder='Кобоюткуч'
+                    placeholder='Коэффициент'
                     value={multiplier}
                     onChange={(e) => setMultiplier(e.target.value)}
                 />
@@ -99,7 +94,7 @@ const TexKarta = () => {
                     onClick={calculateIngredients}
                     className={isCalculating ? 'calculating' : ''}
                 >
-                    Эсептөө
+                    Рассчитать
                 </button>
             </div>
 
@@ -112,7 +107,7 @@ const TexKarta = () => {
                                 <tr>
                                     <th>Ингредиент</th>
                                     <th>Масса (кг)</th>
-                                    <th>Баасы (сом)</th>
+                                    <th>Цена (сом)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,8 +118,10 @@ const TexKarta = () => {
                                         <td>
                                             <input
                                                 type='number'
-                                                placeholder='Баасы'
-                                                onChange={(e) => handlePriceChange(key, parseFloat(e.target.value))}
+                                                placeholder='Цена'
+                                                onChange={(e) =>
+                                                    handlePriceChange(key, parseFloat(e.target.value))
+                                                }
                                             />
                                         </td>
                                     </tr>
@@ -132,8 +129,8 @@ const TexKarta = () => {
                             </tbody>
                         </table>
                     </div>
-                    <h3>Жалпы салмак: {totalWeight.toFixed(3)} кг</h3>
-                    <h3>Жалпы баа: {calculateTotalCost().toFixed(2)} сом</h3>
+                    <h3>Общий вес: {totalWeight.toFixed(3)} кг</h3>
+                    <h3>Общая цена: {calculateTotalCost().toFixed(2)} сом</h3>
                 </div>
             )}
         </div>
