@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './fasol.scss';
 
 import beepSound from '../../assets/zvuk6.mp3'; // Файлдын туура жолун көрсөтүңүз
 
@@ -11,11 +12,13 @@ const Timer = () => {
   const beep = new Audio(beepSound); // Импорттолгон үн файлын колдонуу
 
   const steps = [
+    { time: 14.93, action: 'приготовти индогцтной плита 3500 градуAсов', type: 'plate' },
     { time: 14.83, action: 'Добавьте масло (150г)', type: 'oil' },
     { time: 14, action: 'Добавьте лук (200г)', type: 'onion' },
     { time: 13, action: 'Добавьте болгарский перец (400г)', type: 'pepper' },
     { time: 10, action: 'Добавьте помидоры (500г)', type: 'tomato' },
-    { time:8, action: 'Добавьте томатную пасту (200г)', type: 'paste' },
+    { time: 8.3, action: 'приготовти индогцтной плита 2000 градусов ', type: 'fry' },
+    { time:8, action: 'Добавьте томатную пасту (200г)   ', type: 'paste' },
     { time: 6, action: 'Добавьте воду (400г)', type: 'water' },
     { time: 5, action: 'Добавьте соль (20г)', type: 'salt' },
 		{time: 4, action: 'Добавьте соусШрирача(20г)', type: 'sriraСhasauce'},

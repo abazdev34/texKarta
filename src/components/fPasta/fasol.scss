@@ -1,0 +1,105 @@
+// styles.scss
+
+$primary-color: #4CAF50;
+$secondary-color: #f44336;
+$background-color: #f9f9f9;
+$text-color: #333;
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $background-color;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+
+  &__header {
+    margin-bottom: 20px;
+
+    h1 {
+      font-size: 2rem;
+      color: $primary-color;
+    }
+
+    .timer__display {
+      font-size: 3rem;
+      color: $text-color;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+
+    button {
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+
+      &--reset {
+        background-color: $secondary-color;
+
+        &:hover {
+          background-color: darken($secondary-color, 10%);
+        }
+      }
+    }
+  }
+
+  &__steps {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .timer__step {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+
+      &--completed {
+        text-decoration: line-through;
+        color: gray;
+      }
+
+      &--active {
+        font-weight: bold;
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+// Media query for tablet devices
+@media (min-width: 768px) {
+  .timer {
+    padding: 40px;
+
+    &__header h1 {
+      font-size: 2.5rem;
+    }
+
+    .timer__display {
+      font-size: 4rem;
+    }
+
+    &__controls button {
+      padding: 15px 20px;
+    }
+  }
+}
