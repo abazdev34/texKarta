@@ -23,7 +23,7 @@ const Timer = () => {
     { time: 6, action: 'Добавьте воду (400г)', type: 'water' },
     { time: 5, action: 'Добавьте соль (20г)', type: 'salt' },
     { time: 4, action: 'Добавьте соус Шрирача (120г)', type: 'sriraСhasauce' },
-    { time: 3, action: 'Добавьте фасоль (2,5кг)', type: 'beans' },
+    { time: 3, action: 'Добавьте фасоль (2500г)', type: 'beans' },
     { time: 0, action: 'Блюдо готово!', type: 'done' }
   ];
 
