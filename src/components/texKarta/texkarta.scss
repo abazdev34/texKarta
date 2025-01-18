@@ -36,11 +36,15 @@ $background-color: #f9f9f9; // Светлый фон
             margin: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-            width: 100px; // Устанавливаем ширину кнопки
+            width: 350px; // Устанавливаем ширину кнопки
             height: 40px; // Устанавливаем высоту кнопки
 
             &.main-dish {
                 background-color: $primary-dark; // Темно-зеленый фон для основных блюд
+                color: white; // Белый текст
+            }
+            &.side {
+                background-color:$secondary-color; // Темно-зеленый фон для основных блюд
                 color: white; // Белый текст
             }
 

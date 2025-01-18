@@ -23,9 +23,9 @@ const TexKarta = () => {
         { name: 'соусТако', category: 'sauce' },
         { name: 'соусЧипотило', category: 'sauce' },
         { name: 'МаринадСоусЧипотило', category: 'sauce' },
-        { name: 'фасоловаяПаста', category: 'side' },
-        { name: 'фасалВаренный', category: 'side' },
-        { name: 'Гуакамоле', category: 'side' },
+        { name: 'фасоловаяПаста', category: 'sauce' },
+        { name: 'фасалВаренный', category: 'sauce' },
+        { name: 'Гуакамоле', category: 'sauce' },
     ];
 
     const handleDishSelect = (dish) => {
@@ -107,7 +107,7 @@ const TexKarta = () => {
                                 <tr>
                                     <th>Ингредиент</th>
                                     <th>Масса (кг)</th>
-                                    <th>Цена (сом)</th>
+                                    <th>Цена (рубль)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -130,7 +130,7 @@ const TexKarta = () => {
                         </table>
                     </div>
                     <h3>Общий вес: {totalWeight.toFixed(3)} кг</h3>
-                    <h3>Общая цена: {calculateTotalCost().toFixed(2)} сом</h3>
+                    <h3>Общая цена: {calculateTotalCost().toFixed(2)} рубль</h3>
                 </div>
             )}
         </div>
