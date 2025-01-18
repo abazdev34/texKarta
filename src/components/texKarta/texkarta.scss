@@ -7,6 +7,37 @@ $tertiary-color: #F44336; // Красный для гарниров
 $border-color: #ccc; // Цвет границы
 $background-color: #f9f9f9; // Светлый фон
 
+@keyframes button-click {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.button-animate {
+    animation: button-click 0.3s ease;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.result-container {
+    animation: slide-in 0.5s ease forwards; // Apply slide-in animation
+}
+
 .ingredient-calculator {
     background-color: $background-color;
     padding: 20px;
@@ -44,7 +75,7 @@ $background-color: #f9f9f9; // Светлый фон
                 color: white; // Белый текст
             }
             &.side {
-                background-color:$secondary-color; // Темно-зеленый фон для основных блюд
+                background-color: $secondary-color; // Оранжевый фон для гарниров
                 color: white; // Белый текст
             }
 

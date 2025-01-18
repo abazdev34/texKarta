@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ingredientsData } from './index.jsx';
-import './texkarta.scss'; // Импортируем SCSS файл
+import './texkarta.scss'; // Import SCSS file
 
 const TexKarta = () => {
     const [selectedDish, setSelectedDish] = useState('');
@@ -9,6 +9,7 @@ const TexKarta = () => {
     const [multiplier, setMultiplier] = useState(1);
     const [isCalculating, setIsCalculating] = useState(false);
     const [customPrices, setCustomPrices] = useState({});
+    const [buttonClass, setButtonClass] = useState('');
 
     const quickSelectDishes = [
         { name: 'курицаМ', category: 'main-dish' },
@@ -38,11 +39,13 @@ const TexKarta = () => {
 
     const calculateIngredients = () => {
         setIsCalculating(true);
+        setButtonClass('button-animate'); // Add animation class
         const ingredients = ingredientsData[selectedDish];
 
         if (!ingredients) {
             alert('Блюдо не выбрано.');
             setIsCalculating(false);
+            setButtonClass(''); // Reset class
             return;
         }
 
@@ -57,7 +60,10 @@ const TexKarta = () => {
 
         setResult(calculatedIngredients);
         setTotalWeight(total);
-        setTimeout(() => setIsCalculating(false), 300);
+        setTimeout(() => {
+            setIsCalculating(false);
+            setButtonClass(''); // Reset class after calculation
+        }, 300);
     };
 
     const calculateTotalCost = () => {
@@ -92,7 +98,7 @@ const TexKarta = () => {
                 />
                 <button
                     onClick={calculateIngredients}
-                    className={isCalculating ? 'calculating' : ''}
+                    className={`${isCalculating ? 'calculating' : ''} ${buttonClass}`}
                 >
                     Рассчитать
                 </button>
@@ -107,7 +113,7 @@ const TexKarta = () => {
                                 <tr>
                                     <th>Ингредиент</th>
                                     <th>Масса (кг)</th>
-                                    <th>Цена (рубль)</th>
+                                    {/* <th>Цена (рубль)</th> */}
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,13 +122,13 @@ const TexKarta = () => {
                                         <td>{key}</td>
                                         <td>{value.toFixed(3)}</td>
                                         <td>
-                                            <input
+                                            {/* <input
                                                 type='number'
-                                                placeholder='Цена'
+                                                // placeholder='Цена'
                                                 onChange={(e) =>
                                                     handlePriceChange(key, parseFloat(e.target.value))
                                                 }
-                                            />
+                                            /> */}
                                         </td>
                                     </tr>
                                 ))}
@@ -130,7 +136,7 @@ const TexKarta = () => {
                         </table>
                     </div>
                     <h3>Общий вес: {totalWeight.toFixed(3)} кг</h3>
-                    <h3>Общая цена: {calculateTotalCost().toFixed(2)} рубль</h3>
+                    {/* <h3>Общая цена: {calculateTotalCost().toFixed(2)} рубль</h3> */}
                 </div>
             )}
         </div>
