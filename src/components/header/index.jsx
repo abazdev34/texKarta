@@ -1,30 +1,29 @@
-import { Link } from 'react-router-dom';
-import { IconButton } from '@mui/material';
-import TimerIcon from '@mui/icons-material/Timer';
-import './header.scss';
 
+import { Link } from 'react-router-dom';
+import './header.scss';
+import TimerIcon from '@mui/icons-material/Timer';
 const Header = () => {
-  return (
-    <div className="header">
 
   
-        <IconButton component={Link} to="/texKarta">
- 
-        Техкарта 
-      </IconButton>
-      
+
+  return (
+
      
+       <div className="header">
+         <Link to="/texKarta">    Техкарта</Link>
+         
+            <Link to="/ovoshi">    <TimerIcon />Овощей</Link>
+            <Link to="/timer">    <TimerIcon />фасолевойпаста</Link>
+
+       </div>
       
-      <IconButton component={Link} to="/ovoshi">
-        <TimerIcon />
-       Овощей 
-      </IconButton>
+   
+          
+     
+           
+          
+
       
-      <IconButton component={Link} to="/timer">
-        <TimerIcon />
-        фасолевойпаста
-      </IconButton>
-    </div>
   );
 };
 
