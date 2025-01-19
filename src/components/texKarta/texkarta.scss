@@ -62,23 +62,27 @@ $background-color: #f9f9f9; // Светлый фон
             background-color: transparent;
             color: $primary-color;
             border: 2px solid $border-color;
-            border-radius: 5px;
+        
             padding: 10px 15px;
             margin: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-            width: 180px; // Устанавливаем ширину кнопки
+            width: 300px; // Устанавливаем ширину кнопки
             height: 40px; // Устанавливаем высоту кнопки
 
             &.main-dish {
                 background-color: $primary-dark; // Темно-зеленый фон для основных блюд
                 color: white; // Белый текст
             }
+            
             &.side {
                 background-color: $secondary-color; // Оранжевый фон для гарниров
                 color: white; // Белый текст
             }
-
+&.sauce {
+    background-color: $tertiary-color; // Красный фон для соусов
+    color: white; // Белый текст
+}
             &.active {
                 background-color: darken($primary-dark, 10%);
                 color: white;

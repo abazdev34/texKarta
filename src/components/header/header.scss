@@ -1,78 +1,21 @@
-.app-header {
-  background-color: #4CAF50; // Green background
-  color: white;
-  padding: 10px 20px;
+$primary-dark: rgb(58, 173, 255); 
+.header{
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: relative;
-
-  h1 {
-    margin: 0;
-    font-size: 24px;
-  }
-
-  .menu {
-    display: none; // Hide menu by default
-    list-style: none;
-    transition: max-height 0.3s ease-in-out;
-    overflow: hidden;
-
-    &.open {
-      display: block; // Show menu when open
-    }
-
-    ul {
-      margin: 0;
-      padding: 0;
-
-      li {
-        margin: 0 15px;
-
-        a {
-          color: white;
-          text-decoration: none;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-  }
-
-  .menu-toggle {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    display: block; // Show on all devices
-  }
-}
-
-// Responsive styles
-@media (max-width: 768px) {
-  .menu {
-    display: none; // Hide menu by default on mobile
-    flex-direction: column;
-    position: absolute;
-    top: 60px; // Adjust based on header height
-    left: 0;
-    right: 0;
-    background-color: #4CAF50;
-    z-index: 1000;
-
-    &.open {
-      display: flex; // Show menu when open
-    }
-
-    ul {
-      flex-direction: column;
-      padding: 10px 0;
-
-      li {
-        margin: 10px 0;
-      }
+  justify-content: center;
+  padding: 20 20px;
+  background-color: #2ab836;
+  height: 60px;
+  gap: 5px;
+  a{
+    text-decoration: none;
+    color: #333;
+    background:#f0f0f0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    &:hover{
+      background-color: darken($primary-dark, 10%);
     }
   }
 }

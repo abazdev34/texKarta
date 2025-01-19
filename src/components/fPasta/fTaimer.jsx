@@ -1,6 +1,6 @@
 import  { useState, useEffect } from 'react';
 import './fasol.scss';
-import beepSound from '../../assets/zvuk6.mp3'; // Таймер үчүн үн
+import beepSound from '../../assets/abaz.mp3'; // Таймер үчүн үн
 import finishSound from '../../assets/finish.mp3'; // Блюдо даяр болгондо ойнолуучу үн
 
 const Timer = () => {
