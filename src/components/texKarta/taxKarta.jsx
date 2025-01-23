@@ -16,6 +16,7 @@ const TexKarta = () => {
         { name: 'специКурица', category: 'main-dish' },
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
+        {name:'ГовядинаБарбакоа',category:'main-dish'},
         { name: 'полировка', category: 'side' },
         { name: 'пико', category: 'side' },
         { name: 'овошиЖарыных', category: 'side' },
@@ -50,6 +51,7 @@ const TexKarta = () => {
         }
 
         const calculatedIngredients = {};
+        
         let total = 0;
 
         for (const key in ingredients) {
