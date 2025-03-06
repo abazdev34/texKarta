@@ -4,7 +4,7 @@ import beepSound from '../../assets/vse.mp3'; // Таймер үчүн үн
 import finishSound from '../../assets/finish.mp3'; // Блюдо даяр болгондо ойнолуучу үн
 
 const SousTimer = () => {
-	const [timeLeft, setTimeLeft] = useState(31 * 60);
+	const [timeLeft, setTimeLeft] = useState(41 * 60);
 	const [isRunning, setIsRunning] = useState(false);
 	const [activeStep, setActiveStep] = useState(null);
 	const [isSoundEnabled, setSoundEnabled] = useState(true);
@@ -13,14 +13,14 @@ const SousTimer = () => {
 	const finishBeep = new Audio(finishSound); // Блюдо даяр болгондо ойнолуучу үн
 
 	const steps = [
-		{ time: 30.93, action: 'сначала дабовим молоко 10,500 литров', type: 'plate' },
-		{ time: 30.83, action: 'Добавьте цитрат  натирий  (200г)', type: 'oil' },
-		{ time: 30.70, action: 'Добавьте копченый паприка (130г)', type: 'onion' },
-		{ time: 30.50, action: 'Добавьте соль (260г)', type: 'pepper' },
-		{ time: 30, action: 'Добавьте Аннто (50г)', type: 'tomato' },
-		{ time: 29.50, action: 'добавьте масло (400г)', type: 'fry' },
-		{ time: 29, action: 'Добавьте томатную пасту (660г)', type: 'salt' },
-		{ time: 27, action: 'приготовти индогцтной плита (3500г) пастовую', type: 'paste' },
+		{ time: 40.93, action: 'сначала дабовим молоко 10,500 литров', type: 'plate' },
+		{ time: 38.83, action: 'Добавьте цитрат  натирий  (200г)', type: 'oil' },
+		{ time: 36.70, action: 'Добавьте копченый паприка (130г)', type: 'onion' },
+		{ time: 34.50, action: 'Добавьте соль (260г)', type: 'pepper' },
+		{ time: 32, action: 'Добавьте Аннто (50г)', type: 'tomato' },
+		{ time: 30.50, action: 'добавьте масло (400г)', type: 'fry' },
+		{ time: 30.20, action: 'Добавьте томатную пасту (660г)', type: 'salt' },
+		{ time: 30, action: 'приготовти индогцтной плита (3500г) пастовую', type: 'paste' },
 		{ time: 10, action: 'Добавьте сыр моцарелла (2200г)', type: 'water' },
 		{ time: 8, action: 'Добавьте сыр моцарелла (2200г)', type: 'salt' },
 		{ time: 6, action: 'Добавьте сыр моцарелла (2100г)', type: 'sriraСhasauce' },
@@ -108,7 +108,7 @@ const SousTimer = () => {
 					className="timer__button timer__button--reset"
 					onClick={() => {
 						setIsRunning(false);
-						setTimeLeft(31 * 60);
+						setTimeLeft(41 * 60);
 						setActiveStep(null);
 					}}
 				>
