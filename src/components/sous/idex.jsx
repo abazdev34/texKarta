@@ -107,7 +107,7 @@ const SousTimer = () => {
 					className="timer__button timer__button--reset"
 					onClick={() => {
 						setIsRunning(false);
-						setTimeLeft(15 * 60);
+						setTimeLeft(30 * 60);
 						setActiveStep(null);
 					}}
 				>
