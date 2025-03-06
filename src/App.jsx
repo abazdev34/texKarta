@@ -6,6 +6,7 @@ import './style/App.scss'
 import Header from './components/header'
 import Timer_ovoshi from './components/ovoshi/index.jsx'
 import Timer from './components/fPasta/fTaimer.jsx'
+import SousTimer from './components/sous/idex.jsx'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Route path="/texKarta" element={<TexKarta />} />
     <Route path="/ovoshi" element={<Timer_ovoshi/>} />
     <Route path="/timer" element={<Timer/>} />
+    <Route path="/Sous" element={<SousTimer />} />
 
   </Routes>
 
