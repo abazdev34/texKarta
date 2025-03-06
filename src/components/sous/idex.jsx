@@ -4,7 +4,7 @@ import beepSound from '../../assets/vse.mp3'; // Таймер үчүн үн
 import finishSound from '../../assets/finish.mp3'; // Блюдо даяр болгондо ойнолуучу үн
 
 const SousTimer = () => {
-	const [timeLeft, setTimeLeft] = useState(15 * 60);
+	const [timeLeft, setTimeLeft] = useState(30 * 60);
 	const [isRunning, setIsRunning] = useState(false);
 	const [activeStep, setActiveStep] = useState(null);
 	const [isSoundEnabled, setSoundEnabled] = useState(true);
