@@ -4,7 +4,7 @@ import beepSound from '../../assets/vse.mp3'; // Таймер үчүн үн
 import finishSound from '../../assets/finish.mp3'; // Блюдо даяр болгондо ойнолуучу үн
 
 const SousTimer = () => {
-	const [timeLeft, setTimeLeft] = useState(33 * 60);
+	const [timeLeft, setTimeLeft] = useState(31 * 60);
 	const [isRunning, setIsRunning] = useState(false);
 	const [activeStep, setActiveStep] = useState(null);
 	const [isSoundEnabled, setSoundEnabled] = useState(true);
@@ -107,7 +107,7 @@ const SousTimer = () => {
 					className="timer__button timer__button--reset"
 					onClick={() => {
 						setIsRunning(false);
-						setTimeLeft(33 * 60);
+						setTimeLeft(31 * 60);
 						setActiveStep(null);
 					}}
 				>
