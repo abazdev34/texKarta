@@ -16,8 +16,8 @@ const TexKarta = () => {
         { name: 'специКурица', category: 'main-dish' },
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
-        {name:'ГовядинаБарбакоа',category:'main-dish'},
-        { name: 'полировка', category: 'side' },
+        { name: 'ГовядинаБарбакоа', category: 'main-dish' },
+        { name: 'полировка', category: 'main-dish' },
         { name: 'пико', category: 'side' },
         { name: 'овошиЖарыных', category: 'side' },
         { name: 'рисЗапровка', category: 'side' },
@@ -28,6 +28,7 @@ const TexKarta = () => {
         { name: 'фасоловаяПаста', category: 'sauce' },
         { name: 'фасалВаренный', category: 'sauce' },
         { name: 'Гуакамоле', category: 'sauce' },
+        { name: 'соусСырный', category: 'sauce' },
     ];
 
     const handleDishSelect = (dish) => {
@@ -51,7 +52,6 @@ const TexKarta = () => {
         }
 
         const calculatedIngredients = {};
-        
         let total = 0;
 
         for (const key in ingredients) {
@@ -84,7 +84,7 @@ const TexKarta = () => {
                     <button
                         key={name}
                         onClick={() => handleDishSelect(name)}
-                        className={`dish-category ${category} ${selectedDish === name ? 'active' : ''} ${category === 'main-dish' ? 'main-dish' : ''}`}
+                        className={`dish-category ${category} ${selectedDish === name ? 'active' : ''}`}
                     >
                         {name}
                     </button>
@@ -115,7 +115,7 @@ const TexKarta = () => {
                                 <tr>
                                     <th>Ингредиент</th>
                                     <th>Масса (кг)</th>
-                                    {/* <th>Цена (рубль)</th> */}
+                                    <th>Цена (рубль)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,13 +124,13 @@ const TexKarta = () => {
                                         <td>{key}</td>
                                         <td>{value.toFixed(3)}</td>
                                         <td>
-                                            {/* <input
+                                            <input
                                                 type='number'
-                                                // placeholder='Цена'
+                                                placeholder='Цена'
                                                 onChange={(e) =>
                                                     handlePriceChange(key, parseFloat(e.target.value))
                                                 }
-                                            /> */}
+                                            />
                                         </td>
                                     </tr>
                                 ))}
@@ -138,7 +138,7 @@ const TexKarta = () => {
                         </table>
                     </div>
                     <h3>Общий вес: {totalWeight.toFixed(3)} кг</h3>
-                    {/* <h3>Общая цена: {calculateTotalCost().toFixed(2)} рубль</h3> */}
+                    <h3>Общая цена: {calculateTotalCost().toFixed(2)} рубль</h3>
                 </div>
             )}
         </div>
