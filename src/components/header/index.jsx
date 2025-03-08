@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import './header.scss';
 import TimerIcon from '@mui/icons-material/Timer';
+import { GiTacos } from "react-icons/gi";
 const Header = () => {
 
   
@@ -10,7 +11,7 @@ const Header = () => {
 
      
        <div className="header">
-         <Link to="/texKarta">    Техкарта</Link>
+         <Link to="/texKarta"> <GiTacos />   Техкарта</Link>
          
             <Link to="/ovoshi">    <TimerIcon />Овощи жареные</Link>
             <Link to="/timer">    <TimerIcon />Фасолеваяпаста</Link>

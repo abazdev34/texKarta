@@ -1,3 +1,4 @@
+
 export const ingredientsData = {
 	пико: {
 		лук: 0.125,
