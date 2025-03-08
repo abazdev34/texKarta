@@ -25,7 +25,7 @@ const TexKarta = () => {
         { name: 'соусТако', category: 'sauce' },
         { name: 'соусЧипотило', category: 'sauce' },
         { name: 'Маринад', category: 'sauce' },
-        { name: 'фасоловаяПаста', category: 'sauce' },
+        { name: 'фасолеваяпаста', category: 'sauce' },
         { name: 'фасалВаренный', category: 'sauce' },
         { name: 'Гуакамоле', category: 'sauce' },
         { name: 'соусСырный', category: 'sauce' },

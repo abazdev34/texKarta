@@ -12,8 +12,8 @@ const Header = () => {
        <div className="header">
          <Link to="/texKarta">    Техкарта</Link>
          
-            <Link to="/ovoshi">    <TimerIcon />Овощей</Link>
-            <Link to="/timer">    <TimerIcon />фасолевойпаста</Link>
+            <Link to="/ovoshi">    <TimerIcon />Овощи Жареные</Link>
+            <Link to="/timer">    <TimerIcon />фасолеваяпаста</Link>
 
 
        </div>
