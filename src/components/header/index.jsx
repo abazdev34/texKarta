@@ -14,7 +14,6 @@ const Header = () => {
          
             <Link to="/ovoshi">    <TimerIcon />Овощей</Link>
             <Link to="/timer">    <TimerIcon />фасолевойпаста</Link>
-            <Link to="/Sous">    <TimerIcon />Соус сырный</Link>
 
 
        </div>

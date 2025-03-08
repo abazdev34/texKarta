@@ -115,7 +115,6 @@ const TexKarta = () => {
                                 <tr>
                                     <th>Ингредиент</th>
                                     <th>Масса (кг)</th>
-                                    <th>Цена (рубль)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,13 +123,13 @@ const TexKarta = () => {
                                         <td>{key}</td>
                                         <td>{value.toFixed(3)}</td>
                                         <td>
-                                            <input
+                                            {/* <input
                                                 type='number'
-                                                placeholder='Цена'
+                                               
                                                 onChange={(e) =>
                                                     handlePriceChange(key, parseFloat(e.target.value))
                                                 }
-                                            />
+                                            /> */}
                                         </td>
                                     </tr>
                                 ))}
@@ -138,7 +137,6 @@ const TexKarta = () => {
                         </table>
                     </div>
                     <h3>Общий вес: {totalWeight.toFixed(3)} кг</h3>
-                    <h3>Общая цена: {calculateTotalCost().toFixed(2)} рубль</h3>
                 </div>
             )}
         </div>
