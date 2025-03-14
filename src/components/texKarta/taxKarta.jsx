@@ -10,6 +10,7 @@ const TexKarta = () => {
     const [isCalculating, setIsCalculating] = useState(false);
     const [customPrices, setCustomPrices] = useState({});
     const [buttonClass, setButtonClass] = useState('');
+    const [selectedIngredients, setSelectedIngredients] = useState(new Set()); // Track selected ingredients
 
     const quickSelectDishes = [
         { name: 'курицаМ', category: 'main-dish' },
@@ -76,6 +77,18 @@ const TexKarta = () => {
         }, 0);
     };
 
+    const toggleIngredientSelection = (ingredient) => {
+        setSelectedIngredients((prev) => {
+            const newSelection = new Set(prev);
+            if (newSelection.has(ingredient)) {
+                newSelection.delete(ingredient); // Deselect if already selected
+            } else {
+                newSelection.add(ingredient); // Select if not selected
+            }
+            return newSelection;
+        });
+    };
+
     return (
         <div className='ingredient-calculator'>
             <h1>Техкарта заготовок</h1>
@@ -119,13 +132,20 @@ const TexKarta = () => {
                             </thead>
                             <tbody>
                                 {Object.entries(result).map(([key, value]) => (
-                                    <tr key={key}>
+                                    <tr
+                                        key={key}
+                                        onClick={() => toggleIngredientSelection(key)} // Toggle selection on click
+                                        style={{
+                                            backgroundColor: selectedIngredients.has(key) ? 'red' : 'transparent', // Highlight selected ingredients
+                                            cursor: 'pointer'
+                                        }}
+                                    >
                                         <td>{key}</td>
                                         <td>{value.toFixed(3)}</td>
                                         <td>
+                                            {/* Uncomment to add price input */}
                                             {/* <input
                                                 type='number'
-                                               
                                                 onChange={(e) =>
                                                     handlePriceChange(key, parseFloat(e.target.value))
                                                 }
