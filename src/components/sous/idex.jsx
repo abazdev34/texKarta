@@ -4,7 +4,7 @@ import beepSound from '../../assets/vse.mp3'; // Звук для таймера
 import finishSound from '../../assets/finish.mp3'; // Звук, когда блюдо готово
 
 const SousTimer = () => {
-    const [timeLeft, setTimeLeft] = useState(41 * 60); // Начальное время установлено на 41 минуту
+    const [timeLeft, setTimeLeft] = useState(31 * 60); // Начальное время установлено на 41 минуту
     const [isRunning, setIsRunning] = useState(false);
     const [activeStep, setActiveStep] = useState(null);
     const [isSoundEnabled, setSoundEnabled] = useState(true);
@@ -13,18 +13,19 @@ const SousTimer = () => {
     const finishBeep = new Audio(finishSound); // Звук, когда блюдо готово
 
     const steps = [
-        { time: 40.93, action: 'Добавьте 10.5 литров молока', type: 'oil' },
-        { time: 40, action: 'Добавьте 200 г натрия цитрата', type: 'oil' },
-        { time: 39, action: 'Добавьте 130 г копченой паприки', type: 'oil' },
-        { time: 38, action: 'Добавьте 260 г соли', type: 'oil' },
-        { time: 37, action: 'Добавьте 50 г аннато', type: 'oil' },
-        { time: 36, action: 'Добавьте 400 г масла', type: 'oil' },
-        { time: 35, action: 'Добавьте 660 г томатной пасты', type: 'paste' },
-        { time: 30, action: 'Приготовьте пасту (3500 г) на плите', type: 'paste' },
+        { time: 30.93, action: 'Добавьте 10.5 литров молока', type: 'oil' },
+				{ time:30.93, action: 'Добавьте 1мл г аннато', type: 'oil' },
+        { time: 30.93, action: 'Добавьте 200 г натрия цитрата', type: 'oil' },
+        { time: 30.93, action: 'Добавьте 130 г копченой паприки', type: 'oil' },
+        { time: 30.93, action: 'Добавьте 260 г соли', type: 'oil' },
+      
+        { time: 30.93, action: 'Добавьте 400 г масла', type: 'oil' },
+        { time: 30.93, action: 'Добавьте 660 г томатной пасты', type: 'paste' },
+        { time:30, action: 'Приготовьте пасту (3500 г) на плите', type: 'paste' },
         { time: 10, action: 'Добавьте 2200 г сыра моцарелла', type: 'water' },
         { time: 8, action: 'Добавьте 2200 г сыра моцарелла', type: 'salt' },
         { time: 6, action: 'Добавьте 2100 г сыра моцарелла', type: 'sriracha' },
-        { time: 5, action: 'Добавьте 300 г уксуса и 400 г сока халапеньо', type: 'beans' },
+        { time: 5, action: 'Добавьте 300 г уксуса и 400 г халапеньо и сок халапеньо 400г' , type: 'beans' },
         { time: 0, action: 'Блюдо готово!', type: 'done' }
     ];
 
@@ -73,6 +74,8 @@ const SousTimer = () => {
             console.error('Ошибка воспроизведения звука:', err);
         }
     };
+
+
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
