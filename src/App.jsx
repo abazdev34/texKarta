@@ -18,6 +18,8 @@ function App() {
     <Route path="/ovoshi" element={<Timer_ovoshi/>} />
     <Route path="/timer" element={<Timer/>} />
     <Route path="/Sous" element={<SousTimer />} />
+   
+    
 
   </Routes>
 
