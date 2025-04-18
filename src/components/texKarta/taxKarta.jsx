@@ -18,6 +18,7 @@ const TexKarta = () => {
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
         { name: 'ГовядинаБарбакоа', category: 'main-dish' },
+        { name: 'ГовядинаБарбакоаСоус', category: 'main-dish' },
         { name: 'полировка', category: 'main-dish' },
         { name: 'пико', category: 'side' },
         { name: 'овошиЖарыных', category: 'side' },
