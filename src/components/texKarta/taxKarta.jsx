@@ -142,7 +142,7 @@ const TexKarta = () => {
                                         }}
                                     >
                                         <td>{key}</td>
-                                        <td>{value}</td>
+                                        <td>{value.toFixed(5)}</td>
                                         <td>
                                             {/* Uncomment to add price input */}
                                             {/* <input
