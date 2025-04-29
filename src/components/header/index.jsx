@@ -5,7 +5,9 @@ import { GiChickenOven, GiTacos } from "react-icons/gi";
 import { useEffect, useState } from 'react';
 
 const Header = () => {
-  const [isLaptop, setIsLaptop] = useState(window.innerWidth >= 1024); // Ноутбук өлшемі
+  const [isLaptop, setIsLaptop] = useState(window.innerWidth >= 224); // Ноутбук өлшемі
+  const [password, setPassword] = useState('');
+  const [showProduct, setShowProduct] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -18,14 +20,41 @@ const Header = () => {
     };
   }, []);
 
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    if (password === 'yourPassword') { // Мұнда 'yourPassword' дегенді өз пароліңізбен ауыстырыңыз
+      setShowProduct(true);
+    } else {
+      alert('Неправильный пароль');
+    }
+  };
+
   return (
     <div className="header">
       <Link to="/texKarta"><GiTacos /> Техкарта</Link>
       <Link to="/ovoshi"><TimerIcon /> Овощи жареные</Link>
       <Link to="/timer"><TimerIcon /> Фасолевая паста</Link>
       <Link to="/Sous"><TimerIcon /> Соус</Link>
-      {isLaptop && (
-        <Link to="/Texmyso"><GiChickenOven /> Готовый продук</Link>
+     
+      {(isLaptop || showProduct) && (
+        <>
+          <form onSubmit={handlePasswordSubmit}>
+            <input 
+              type="password" 
+              value={password} 
+              onChange={handlePasswordChange} 
+              placeholder="Пароль енгізіңіз" 
+            />
+            <button type="submit">Готовый продукт</button>
+          </form>
+          {showProduct && (
+            <Link to="/Texmyso"><GiChickenOven /> Готовый продукт</Link>
+          )}
+        </>
       )}
     </div>
   );
