@@ -5,20 +5,20 @@ import { GiChickenOven, GiTacos } from "react-icons/gi";
 import { useEffect, useState } from 'react';
 
 const Header = () => {
-  const [isLaptop, setIsLaptop] = useState(window.innerWidth >= 324); // Ноутбук өлшемі
+  // const [isLaptop, setIsLaptop] = useState(window.innerWidth >= 324); // Ноутбук өлшемі
   const [password, setPassword] = useState('');
   const [showProduct, setShowProduct] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsLaptop(window.innerWidth >= 324);
-    };
+    // const handleResize = () => {
+    //   setIsLaptop(window.innerWidth >= 324);
+    // };
 
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  //   window.addEventListener('resize', handleResize);
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -40,7 +40,7 @@ const Header = () => {
       <Link to="/timer"><TimerIcon /> Фасолевая паста</Link>
       <Link to="/Sous"><TimerIcon /> Соус</Link>
      
-      {(isLaptop || showProduct) && (
+      {( showProduct) && (
         <>
           <form onSubmit={handlePasswordSubmit}>
             <input 
