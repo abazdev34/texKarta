@@ -5,13 +5,13 @@ import { GiChickenOven, GiTacos } from "react-icons/gi";
 import { useEffect, useState } from 'react';
 
 const Header = () => {
-  const [isLaptop, setIsLaptop] = useState(window.innerWidth >= 224); // Ноутбук өлшемі
+  const [isLaptop, setIsLaptop] = useState(window.innerWidth >= 324); // Ноутбук өлшемі
   const [password, setPassword] = useState('');
   const [showProduct, setShowProduct] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsLaptop(window.innerWidth >= 1024);
+      setIsLaptop(window.innerWidth >= 324);
     };
 
     window.addEventListener('resize', handleResize);
@@ -26,7 +26,7 @@ const Header = () => {
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    if (password === 'yourPassword') { // Мұнда 'yourPassword' дегенді өз пароліңізбен ауыстырыңыз
+    if (password === 'abazT') { // Мұнда 'yourPassword' дегенді өз пароліңізбен ауыстырыңыз
       setShowProduct(true);
     } else {
       alert('Неправильный пароль');
