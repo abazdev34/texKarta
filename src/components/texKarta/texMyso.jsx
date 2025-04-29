@@ -15,8 +15,10 @@ const Texmyso = () => {
     const quickSelectDishes = [
         { name: 'курицаМаринат', category: 'main-dish' },
         { name: 'специКурица', category: 'main-dish' },
+				{ name: 'готовыйКурица', category: 'main-dish' },
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
+			
     ];
 
     const handleDishSelect = (dish) => {
