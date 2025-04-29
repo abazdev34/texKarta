@@ -2,6 +2,8 @@
 import { Link } from 'react-router-dom';
 import './header.scss';
 import TimerIcon from '@mui/icons-material/Timer';
+import { GiChickenOven } from "react-icons/gi";
+
 import { GiTacos } from "react-icons/gi";
 const Header = () => {
 
@@ -16,7 +18,7 @@ const Header = () => {
             <Link to="/ovoshi">    <TimerIcon />Овощи жареные</Link>
             <Link to="/timer">    <TimerIcon />Фасолеваяпаста</Link>
             <Link to="/Sous">    <TimerIcon />Соус</Link>
-            <Link to="/Texmyso">    <TimerIcon />мясо</Link>
+            <Link to="/Texmyso">   <GiChickenOven />Готовый продук</Link>
          
 
 

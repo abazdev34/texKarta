@@ -18,7 +18,7 @@ const Texmyso = () => {
 				{ name: 'готовыйКурица', category: 'main-dish' },
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
-			
+				{ name: 'готовыйОвоши', category: 'main-dish' },
     ];
 
     const handleDishSelect = (dish) => {
@@ -57,7 +57,7 @@ const Texmyso = () => {
         setTimeout(() => {
             setIsCalculating(false);
             setButtonClass('');
-        }, 300);
+        }, 0);
     };
 
     const calculateTotalCost = () => {
@@ -65,7 +65,7 @@ const Texmyso = () => {
         return Object.entries(result).reduce((total, [ingredient, weight]) => {
             const price = customPrices[ingredient] || 0;
             return total + price * weight;
-        }, 0);
+        },0);
     };
 
     const toggleIngredientSelection = (ingredient) => {
