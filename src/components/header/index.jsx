@@ -47,7 +47,7 @@ const Header = () => {
               type="password" 
               value={password} 
               onChange={handlePasswordChange} 
-              placeholder="Пароль енгізіңіз" 
+              placeholder="доступ только через пароль " 
             />
             <button type="submit">Готовый продукт</button>
           </form>
