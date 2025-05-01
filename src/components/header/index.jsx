@@ -26,7 +26,7 @@ const Header = () => {
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    if (password === 'abazT') { // Мұнда 'yourPassword' дегенді өз пароліңізбен ауыстырыңыз
+    if (password === 'abazT1989') { // Мұнда 'yourPassword' дегенді өз пароліңізбен ауыстырыңыз
       setShowProduct(true);
     } else {
       alert('Неправильный пароль');
@@ -47,7 +47,7 @@ const Header = () => {
               type="password" 
               value={password} 
               onChange={handlePasswordChange} 
-              placeholder="доступ только  пароль " 
+              placeholder="доступ только с пароля " 
             />
             <button type="submit">Готовый продукт</button>
           </form>
