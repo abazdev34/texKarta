@@ -33,6 +33,7 @@ const TexKarta = () => {
         { name: 'соусСырный', category: 'sauce' },
         { name: 'Авокадо', category: 'sauce' },
         
+        
     ];
 
     const handleDishSelect = (dish) => {
