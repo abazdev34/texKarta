@@ -31,6 +31,8 @@ const TexKarta = () => {
         { name: 'фасалВаренный', category: 'sauce' },
         { name: 'Гуакамоле', category: 'sauce' },
         { name: 'соусСырный', category: 'sauce' },
+        { name: 'Авокадо', category: 'sauce' },
+        
     ];
 
     const handleDishSelect = (dish) => {
