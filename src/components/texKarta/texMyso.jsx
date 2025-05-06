@@ -22,6 +22,7 @@ const Texmyso = () => {
         { name: 'ГуакамолеГотовый', category: 'sauce' },
         { name: 'Пико', category: 'sauce' },
         { name: 'Фасолеваяпаста', category: 'sauce' },
+        { name: 'фасолеваяпастаГотовый', category: 'main-dish' },
 	]
 
 	const handleDishSelect = (dish) => {
