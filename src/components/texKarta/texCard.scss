@@ -1,0 +1,208 @@
+// texkarta.scss
+
+$primary-color: #4a90e2;
+$secondary-color: #f5f5f5;
+$text-color: #333;
+$button-hover-color: darken($primary-color, 10%);
+$button-active-color: darken($primary-color, 15%);
+$border-color: #e0e0e0;
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.ingredient-calculator {
+  max-width: 800px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border: 1px solid $border-color;
+
+  h1 {
+    text-align: center;
+    color: $primary-color;
+    margin-bottom: 20px;
+  }
+
+  .quick-select {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    .dish-category {
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &.active {
+        background-color: $button-active-color;
+      }
+
+      &:hover {
+        background-color: $button-hover-color;
+      }
+    }
+  }
+
+  .input-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    input {
+      flex: 1;
+      margin-right: 10px;
+      padding: 10px;
+      border: 1px solid $border-color;
+      border-radius: 5px;
+      font-size: 16px;
+
+      &:focus {
+        border-color: $primary-color;
+        outline: none;
+      }
+    }
+
+    button {
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &.calculating {
+        background-color: $button-active-color;
+      }
+
+      &:hover {
+        background-color: $button-hover-color;
+      }
+    }
+  }
+
+  .result-container {
+    margin-top: 20px;
+
+    h2 {
+      color: $primary-color;
+    }
+
+    .table-container {
+      overflow-x: auto;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th, td {
+       margin: 5px;
+          padding: 10px;
+          text-align: left;
+          border: 1px solid $border-color;
+        }
+
+        th {
+          background-color: $secondary-color;
+        }
+
+        tr:hover {
+          background-color: #f9f9f9;
+        }
+      }
+    }
+
+    .total-cost {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: $primary-color;
+    }
+  }
+
+  .show-products-button {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+// margin: 5px;
+    &:hover {
+      background-color: $button-hover-color;
+    }
+  }
+
+  .product-list {
+    margin-top: 20px;
+
+    h2 {
+      color: $primary-color;
+    }
+
+    .table-container {
+      overflow-x: auto;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+
+        th, td {
+          padding: 10px;
+          text-align: left;
+          border: 1px solid $border-color;
+        }
+
+        th {
+          background-color: $secondary-color;
+        }
+
+        tr:hover {
+          background-color: #f9f9f9;
+        }
+
+        button {
+          background-color: $primary-color;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          padding: 5px 10px;
+          cursor: pointer;
+          // margin: 5px;
+
+          &:hover {
+            background-color: $button-hover-color;
+          }
+        }
+      }
+    }
+
+    .add-product {
+      margin-top: 20px;
+
+      input {
+        margin-right: 10px;
+        padding: 10px;
+        border: 1px solid $border-color;
+        border-radius: 5px;
+        flex: 1;
+
+        &:focus {
+          border-color: $primary-color;
+          outline: none;
+        }

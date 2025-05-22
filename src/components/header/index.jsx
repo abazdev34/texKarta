@@ -26,7 +26,7 @@ const Header = () => {
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    if (password === 'abazT1989') { // Мұнда 'yourPassword' дегенді өз пароліңізбен ауыстырыңыз
+    if (password === '2331') { // Мұнда 'yourPassword' дегенді өз пароліңізбен ауыстырыңыз
       setShowProduct(true);
     } else {
       alert('Неправильный пароль');
@@ -52,7 +52,7 @@ const Header = () => {
             <button type="submit">Готовый продукт</button>
           </form>
           {showProduct && (
-            <Link to="/Texmyso"><GiChickenOven /> Готовый продукт</Link>
+            <Link to="/TexCard"><GiChickenOven /> Цена Стоймост</Link>
           )}
         </>
       )}

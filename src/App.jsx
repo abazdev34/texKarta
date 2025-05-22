@@ -7,7 +7,8 @@ import Header from './components/header'
 import Timer_ovoshi from './components/ovoshi/index.jsx'
 import Timer from './components/fPasta/fTaimer.jsx'
 import SousTimer from './components/sous/idex.jsx'
-import Texmyso from './components/texKarta/texMyso.jsx'
+
+import TexCard from './components/texKarta/texCard.jsx'
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
     <Route path="/ovoshi" element={<Timer_ovoshi/>} />
     <Route path="/timer" element={<Timer/>} />
     <Route path="/Sous" element={<SousTimer />} />
-    <Route path="/Texmyso" element={<Texmyso />} />
+    <Route path="/texCard" element={<TexCard />} />
     
    
     
