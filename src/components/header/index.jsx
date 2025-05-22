@@ -49,7 +49,7 @@ const Header = () => {
               onChange={handlePasswordChange} 
               placeholder="доступ только с пароля " 
             />
-            <button type="submit">Готовый продукт</button>
+            <button type="submit">Открыть</button>
           </form>
           {showProduct && (
             <Link to="/TexCard"><GiChickenOven /> Цена Стоймост</Link>
