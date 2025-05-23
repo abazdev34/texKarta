@@ -13,6 +13,7 @@ const TexCard = () => {
   const [showProducts, setShowProducts] = useState(false);
   const [newProduct, setNewProduct] = useState({ name: '', price: '' });
   const [editingProduct, setEditingProduct] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const quickSelectDishes = [
     { name: 'КурицаМаринат', category: 'main-dish' },
@@ -27,7 +28,7 @@ const TexCard = () => {
     { name: 'СпециДляКурицы', category: 'side' }, 
     { name: 'СпециДляФарши', category: 'side' },
     { name: 'ДляСоусаЧипотле', category: 'side' },
-      { name: 'фасалВаренный', category: 'side' },
+    { name: 'фасалВаренный', category: 'side' },
   ];
 
   const handleDishSelect = (dish) => {
@@ -118,6 +119,11 @@ const TexCard = () => {
     }
   };
 
+  // Filter products based on search term
+  const filteredProducts = Object.entries(pracs).filter(([productName]) =>
+    productName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className='ingredient-calculator'>
       <h1>Техкарта заготовок</h1>
@@ -194,23 +200,32 @@ const TexCard = () => {
       {showProducts && (
         <div className='product-list'>
           <h2>Список продуктов:</h2>
+          <input
+            type='text'
+            placeholder='Поиск продукта'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className='search-input'
+          />
           <div className='table-container'>
             <table>
               <thead>
                 <tr>
                   <th>Название продукта</th>
-                  <th>Цена </th>
+                  <th>Цена</th>
                   <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
-                {Object.entries(pracs).map(([productName, price]) => (
+                {filteredProducts.map(([productName, price]) => (
                   <tr key={productName}>
-                    <td>{productName}</td>
-                    <td>{price}</td>
+                    <td className='product-name'>{productName}</td>
+                    <td className='product-price'>{price}</td>
                     <td>
-                      <button onClick={() => startEditingProduct(productName)}>Изменить</button>
-                      <button onClick={() => removeProduct(productName)}>Удалить</button>
+                      <div className='action-buttons'>
+                        <button className='edit-button' onClick={() => startEditingProduct(productName)}>Изменить</button>
+                        <button className='delete-button' onClick={() => removeProduct(productName)}>Удалить</button>
+                      </div>
                     </td>
                   </tr>
                 ))}
