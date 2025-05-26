@@ -32,9 +32,9 @@ body {
   }
 
   .quick-select {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+    display: flex;
+    flex-direction: column; // Stack buttons vertically
+    gap: 10px; // Space between buttons
     margin-bottom: 30px;
 
     .dish-category {
@@ -46,6 +46,7 @@ body {
       font-size: 1rem;
       cursor: pointer;
       transition: background 0.3s;
+      width: 100%; // Full width for buttons
 
       &.active {
         background: $primary-color;
@@ -144,7 +145,7 @@ body {
 
   @media (max-width: 768px) {
     .quick-select {
-      grid-template-columns: 1fr; // Stack buttons vertically on small screens
+      flex-direction: column; // Ensure buttons stack vertically
     }
 
     .input-container {
