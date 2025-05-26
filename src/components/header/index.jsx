@@ -52,7 +52,7 @@ const Header = () => {
             <button type="submit">Открыть</button>
           </form>
           {showProduct && (
-            <Link to="/TexCard"><GiChickenOven /> Цена Стоймост</Link>
+            <Link to="/TexCard"> Стоимость</Link>
           )}
         </>
       )}
