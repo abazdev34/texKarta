@@ -29,6 +29,7 @@ const TexCard = () => {
     { name: 'СпециДляФарши', category: 'side' },
     { name: 'ДляСоусаЧипотле', category: 'side' },
     { name: 'фасалВаренный', category: 'side' },
+    { name: 'ЧикенСлайдер', category: 'side' },
   ];
 
   const handleDishSelect = (dish) => {
