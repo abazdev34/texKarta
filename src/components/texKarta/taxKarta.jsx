@@ -13,7 +13,7 @@ const TexKarta = () => {
     const [selectedIngredients, setSelectedIngredients] = useState(new Set()); // Track selected ingredients
 
     const quickSelectDishes = [
-        { name: 'курицаМ', category: 'main-dish' },
+        { name: 'курицаМаринад', category: 'main-dish' },
         { name: 'специКурица', category: 'main-dish' },
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
@@ -32,10 +32,6 @@ const TexKarta = () => {
         { name: 'Гуакамоле', category: 'sauce' },
         { name: 'соусСырный', category: 'sauce' },
         { name: 'Авокадо', category: 'sauce' },
-        
-	
-        
-        
     ];
 
     const handleDishSelect = (dish) => {
@@ -148,15 +144,6 @@ const TexKarta = () => {
                                     >
                                         <td>{key}</td>
                                         <td>{value.toFixed(5)}</td>
-                                        <td>
-                                            {/* Uncomment to add price input */}
-                                            {/* <input
-                                                type='number'
-                                                onChange={(e) =>
-                                                    handlePriceChange(key, parseFloat(e.target.value))
-                                                }
-                                            /> */}
-                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

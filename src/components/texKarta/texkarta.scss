@@ -37,48 +37,23 @@ body {
     gap: 15px;
     margin-bottom: 30px;
 
-    .dish-card {
-      width: 100%;
-      padding: 15px 20px;
+    .dish-category {
+      padding: 15px;
       border: none;
-      border-radius: 15px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      border-radius: 10px;
       background: $secondary-color;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      color: $text-color;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
 
       &.active {
         background: $primary-color;
         color: white;
-        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
       }
 
       &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      }
-
-      h2 {
-        font-size: 1.2rem;
-        margin: 0;
-      }
-
-      p {
-        font-size: 0.9rem;
-        color: $text-color;
-      }
-
-      .icon {
-        width: 24px;
-        height: 24px;
-        margin-bottom: 10px;
-        color: $primary-color;
+        background: $hover-color;
       }
     }
   }
@@ -109,7 +84,7 @@ body {
       }
     }
 
-    .calculate-button {
+    button {
       background: linear-gradient(45deg, #667eea, #764ba2);
       color: white;
       border: none;
@@ -124,16 +99,6 @@ body {
         transform: translateY(-2px);
         box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
       }
-
-      &.calculating {
-        animation: pulse 1s infinite;
-      }
-
-      @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-      }
     }
   }
 
@@ -144,18 +109,6 @@ body {
     padding: 30px;
     margin: 30px 0;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    animation: slideInUp 0.6s ease-out;
-
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
 
     h2 {
       color: #333;
@@ -186,111 +139,10 @@ body {
         text-align: left;
         border-bottom: 1px solid #eee;
       }
-
-      tbody tr {
-        transition: all 0.3s ease;
-        cursor: pointer;
-
-        &:hover {
-          background: rgba(102, 126, 234, 0.1);
-          transform: scale(1.01);
-        }
-      }
-
-      .selected-row {
-        background: rgba(255, 107, 107, 0.3) !important;
-        transform: scale(1.02);
-      }
     }
-
-    .total-cost {
-      text-align: center;
-      margin-top: 20px;
-      padding: 20px;
-      background: linear-gradient(45deg, #667eea, #764ba2);
-      color: white;
-      border-radius: 15px;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-  }
-
-  .product-list {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 30px;
-    margin-top: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    animation: slideInUp 0.6s ease-out;
-
-    .search-input {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    .add-product, .edit-product {
-      background: rgba(240, 240, 240, 0.5);
-      padding: 20px;
-      border-radius: 15px;
-      margin-top: 20px;
-    }
-
-    .add-product h3, .edit-product h3 {
-      margin-bottom: 15px;
-      color: #333;
-    }
-
-    .add-product input, .edit-product input {
-      margin-right: 10px;
-      margin-bottom: 10px;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    .edit-button, .delete-button {
-      padding: 8px 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .edit-button {
-      background: linear-gradient(45deg, #4ecdc4, #44a08d);
-      color: white;
-    }
-
-    .delete-button {
-      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-      color: white;
-    }
-
-    .edit-button:hover, .delete-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-  }
-
-  .show-products-button {
-    display: block;
-    margin: 20px auto;
   }
 
   @media (max-width: 768px) {
-    .ingredient-calculator {
-      padding: 15px;
-    }
-
-    h1 {
-      font-size: 2rem;
-    }
-
     .quick-select {
       grid-template-columns: 1fr; // Stack buttons vertically on small screens
     }
@@ -304,29 +156,12 @@ body {
       min-width: 100%; // Full width for inputs
     }
 
-    .calculate-button {
-      width: 100%; // Full width for button
-    }
-
-    .result-container, .product-list {
+    .result-container {
       padding: 20px; // Reduce padding for smaller screens
     }
 
     .table-container {
       overflow-x: auto; // Allow horizontal scrolling for tables
-    }
-
-    .add-product, .edit-product {
-      padding: 15px; // Reduce padding for smaller screens
-    }
-
-    .action-buttons {
-      flex-direction: column; // Stack action buttons vertically
-      gap: 5px; // Reduce gap between buttons
-    }
-
-    .edit-button, .delete-button {
-      width: 100%; // Full width for buttons
     }
   }
 }
