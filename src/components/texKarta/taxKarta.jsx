@@ -13,7 +13,7 @@ const TexKarta = () => {
     const [selectedIngredients, setSelectedIngredients] = useState(new Set()); // Track selected ingredients
 
     const quickSelectDishes = [
-        { name: 'курицаМаринад', category: 'main-dish' },
+        { name: 'КурицаМаринад', category: 'main-dish' },
         { name: 'специКурица', category: 'main-dish' },
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
