@@ -5,7 +5,7 @@ import { GiChickenOven, GiTacos } from "react-icons/gi";
 import { useEffect, useState } from 'react';
 
 const Header = () => {
-  const [isLaptop, setIsLaptop] = useState(window.innerWidth >= 324); // Ноутбук өлшемі
+  const [isLaptop, setIsLaptop] = useState(window.innerWidth >= 324); // Ноутбук өлчөмү
   const [password, setPassword] = useState('');
   const [showProduct, setShowProduct] = useState(false);
 
@@ -26,7 +26,7 @@ const Header = () => {
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    if (password === '2331') { // Мұнда 'yourPassword' дегенді өз пароліңізбен ауыстырыңыз
+    if (password === '2331') { // Мұнда 'yourPassword' дегенди өз пароліңізбен ауыстырыңыз
       setShowProduct(true);
     } else {
       alert('Неправильный пароль');
@@ -52,7 +52,7 @@ const Header = () => {
             <button type="submit">Открыть</button>
           </form>
           {showProduct && (
-            <Link to="/TexCard"> Стоимость</Link>
+            <Link to="/TexCard" className="show-cost-button"> Стоимость</Link>
           )}
         </>
       )}

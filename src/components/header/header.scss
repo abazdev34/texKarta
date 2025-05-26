@@ -1,41 +1,99 @@
-.header {
-  display: flex;
-  justify-content: space-around; // Space out the links evenly
-  align-items: center; // Center items vertically
-  padding: 10px 20px; // Add some padding
-  background-color: #f8f8f8; // Background color for the header
-  border-bottom: 1px solid #ccc; // Optional border for separation
+$primary-color: #ff6b6b; // Негизги түс
+$secondary-color: #f7f7f7; // Жеңил фон
+$text-color: #333; // Негизги текст түсү
+$border-color: #e0e0e0; // Чек түсү
+$hover-color: darken($primary-color, 10%); // Ховер эффект үчүн караңгыланган түс
+$button-background: #007bff; // Көк фон
 
-  a {
-      text-decoration: none; // Remove underline from links
-      color: #333; // Link color
-      font-size: 1.2em; // Default font size
-      display: flex; // Use flex to align icon and text
-      align-items: center; // Center icon and text vertically
-      padding: 10px; // Add padding around links
-
-      &:hover {
-          color: #007bff; // Change color on hover
-      }
-
-      svg {
-          margin-right: 5px; // Space between icon and text
-      }
-  }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; // Шрифт
+  background-color: #f0f0f0; // Арткы фон түсү
+  background-image: url('path/to/your/background-image.jpg'); // Арткы фон сүрөтү
+  background-size: cover; // Сүрөттү толук жапканга
+  background-position: center; // Сүрөттү борборго жайгаштыруу
+  background-repeat: no-repeat; // Сүрөттү кайталоо
 }
 
-// Media query for smaller screens
-@media (max-width: 768px) {
-  .header {
-      flex-direction: column; // Stack links vertically
-      align-items: flex-start; // Align items to the start
-      padding: 10px; // Adjust padding for smaller screens
+.header {
+  display: flex; // Flex контейнер
+  flex-direction: column; // Вертикалдуу тизмек
+  align-items: center; // Ортого жайгаштыруу
+  background-color: $secondary-color; // Фон түсү
+  padding: 20px; // Ички жыйнактар
+  border-radius: 10px; // Бурчтарды тегиздөө
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); // Көлөкө
+  margin: 20px; // Тышкы жыйнактар
 
-      a {
-          font-size: 1em; // Smaller font size for mobile
-          padding: 8px 0; // Adjust padding for links
-          width: 100%; // Make links full width
-          text-align: left; // Align text to the left
+  a {
+    display: flex; // Flex контейнер
+    align-items: center; // Ортого вертикалдуу жайгаштыруу
+    background-color: $button-background; // Көк фон
+    color: white; // Текст түсү
+    padding: 15px 20px; // Ички жыйнактар
+    border-radius: 8px; // Бурчтарды тегиздөө
+    margin: 10px 0; // Төмөнкү жыйнак
+    text-decoration: none; // Чек жок
+    transition: background 0.3s; // Фон өзгөрүүсү
+    width: 100%; // Туурасы толук
+    max-width: 300px; // Максимум туурасы
+
+    &:hover {
+      background-color: darken($button-background, 10%); // Ховер эффект
+    }
+
+    svg {
+      margin-right: 10px; // Иконка менен тексттин ортосундагы аралык
+    }
+  }
+
+  form {
+    display: flex; // Flex контейнер
+    flex-direction: column; // Вертикалдуу тизмек
+    align-items: center; // Ортого жайгаштыруу
+    margin-top: 20px; // Жогорку жыйнак
+
+    input {
+      padding: 10px; // Ички жыйнак
+      border: 1px solid $border-color; // Чек
+      border-radius: 8px; // Бурчтарды тегиздөө
+      margin-bottom: 10px; // Төмөнкү жыйнак
+      width: 100%; // Туурасы толук
+      max-width: 300px; // Максимум туурасы
+      font-size: 16px; // Шрифт өлчөмү
+
+      &:focus {
+        outline: none; // Чек жок
+        border-color: $primary-color; // Фон түсү
       }
+    }
+
+    button {
+      background-color: $primary-color; // Негизги фон
+      color: white; // Текст түсү
+      padding: 10px 20px; // Ички жыйнактар
+      border: none; // Чек жок
+      border-radius: 8px; // Бурчтарды тегиздөө
+      cursor: pointer; // Курсор
+      transition: background 0.3s; // Фон өзгөрүүсү
+
+      &:hover {
+        background-color: darken($primary-color, 10%); // Ховер эффект
+      }
+    }
+  }
+
+  .show-cost-button {
+    background-color: #28a745; // "Стоимость" баскычынын фон түсү
+    color: white; // Текст түсү
+    padding: 10px 20px; // Ички жыйнактар
+    border: none; // Чек жок
+    border-radius: 8px; // Бурчтарды тегиздөө
+    cursor: pointer; // Курсор
+    transition: background 0.3s; // Фон өзгөрүүсү
+    margin-top: 10px; // Жогорку жыйнак
+
+    &:hover {
+      background-color: darken(#28a745, 10%); // Ховер эффект
+    }
   }
 }
