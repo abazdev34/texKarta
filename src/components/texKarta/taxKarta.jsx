@@ -17,13 +17,9 @@ const TexKarta = () => {
         { name: 'специКурица', category: 'main-dish' },
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
-        { name: 'ГовядинаБарбакоа', category: 'main-dish' },
-        { name: 'соусГовядина', category: 'main-dish' },
-        { name: 'полировка', category: 'main-dish' },
         { name: 'пико', category: 'side' },
         { name: 'овошиЖарыных', category: 'side' },
         { name: 'рисЗапровка', category: 'side' },
-        { name: 'соусОстырыйЧили', category: 'sauce' },
         { name: 'соусТако', category: 'sauce' },
         { name: 'соусЧипотило', category: 'sauce' },
         { name: 'Маринад', category: 'sauce' },
@@ -31,7 +27,6 @@ const TexKarta = () => {
         { name: 'фасалВаренный', category: 'sauce' },
         { name: 'Гуакамоле', category: 'sauce' },
         { name: 'соусСырный', category: 'sauce' },
-        { name: 'Авокадо', category: 'sauce' },
     ];
 
     const handleDishSelect = (dish) => {
