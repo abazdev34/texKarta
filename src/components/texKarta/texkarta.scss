@@ -1,183 +1,482 @@
-$primary-color: #ff6b6b; // Негизги түс
-$secondary-color: #f7f7f7; // Жеңил фон
-$text-color: #333; // Негизги текст түсү
-$border-color: #e0e0e0; // Чек түсү
-$hover-color: darken($primary-color, 10%); // Ховер эффект үчүн караңгыланган түс
+// TexKarta.scss - Animated Recipe Calculator Styles
 
-// Категориялар үчүн түстөр
-$main-dish-color: #67c8f9; // Негизги тамактар үчүн түс
-$side-dish-color: #ffcc5c; // Тараптар үчүн түс
-$sauce-color: #ff6b6b; // Соустар үчүн түс
+// Variables
+$primary-color: #2c3e50;
+$secondary-color: #3498db;
+$accent-color: #e74c3c;
+$success-color: #27ae60;
+$warning-color: #f39c12;
+$dark-color: #34495e;
+$light-color: #ecf0f1;
+$white: #ffffff;
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; // Шрифт
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 60%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  80% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    max-height: 800px;
+    transform: translateY(0);
+  }
+}
+
+// Main container
 .ingredient-calculator {
-  min-height: 100vh; // Минимум бийиктик
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); // Фон градиенти
-  padding: 20px; // Ички жыйнактар
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  animation: fadeInUp 0.8s ease-out;
 
   h1 {
-    text-align: center; // Ортого жайгаштыруу
-    font-size: 2.5rem; // Шрифт өлчөмү
-    color: white; // Түс
-    margin-bottom: 30px; // Төмөнкү жыйнак
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); // Тексттин көлөкөсү
-    animation: glow 2s ease-in-out infinite alternate; // Анимация
+    text-align: center;
+    color: $white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: bounce 1s ease-out;
   }
+}
 
-  @keyframes glow {
-    from {
-      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+// Quick select dishes container
+.quick-select {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: slideDown 0.8s ease-out 0.3s forwards;
+
+  button {
+    padding: 1.2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    transform: translateY(20px);
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    min-width: 0;
+
+    // Staggered animation for buttons
+    @for $i from 1 through 14 {
+      &:nth-child(#{$i}) {
+        animation: slideInLeft 0.5s ease-out #{$i * 0.1}s forwards;
+      }
     }
-    to {
-      text-shadow: 0 4px 20px rgba(255, 255, 255, 0.4);
+
+    // Shimmer effect
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -200px;
+      width: 200px;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.5s;
     }
-  }
 
-  .quick-select {
-    display: flex; // Flex контейнер
-    flex-direction: column; // Вертикалдуу тизмек
-    gap: 10px; // Кнопкалардын ортосундагы аралык
-    margin-bottom: 30px; // Төмөнкү жыйнак
+    &:hover::before {
+      left: 200px;
+    }
 
-    .dish-category {
-      padding: 15px; // Ички жыйнак
-      border: none; // Чек жок
-      border-radius: 10px; // Бурчтарды тегиздөө
-      color: $text-color; // Текст түсү
-      font-size: 1rem; // Шрифт өлчөмү
-      cursor: pointer; // Курсор
-      transition: background 0.3s; // Фон өзгөрүүсү
+    &:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
 
-      &.main-dish {
-        background: $main-dish-color; // Негизги тамактар үчүн фон
+    &:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    &.active {
+      animation: pulse 0.6s ease-in-out;
+    }
+
+    // Category-based colors
+    &.main-dish {
+      background: linear-gradient(135deg, $accent-color, #c0392b);
+      color: $white;
+      
+      &:hover {
+        background: linear-gradient(135deg, #c0392b, $accent-color);
       }
-
-      &.side-dish {
-        background: $side-dish-color; // Тараптар үчүн фон
-      }
-
-      &.sauce {
-        background: $sauce-color; // Соустар үчүн фон
-      }
-
+      
       &.active {
-        background: $primary-color; // Тандалган учурдагы фон
-        color: white; // Текст түсү
+        background: linear-gradient(135deg, #a93226, #922b21);
+        box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
       }
+    }
 
+    &.side {
+      background: linear-gradient(135deg, $success-color, #229954);
+      color: $white;
+      
       &:hover {
-        background: $hover-color; // Ховер эффект
+        background: linear-gradient(135deg, #229954, $success-color);
       }
-    }
-  }
-
-  .input-container {
-    display: flex; // Flex контейнер
-    gap: 20px; // Элементтердин ортосундагы аралык
-    margin-bottom: 30px; // Төмөнкү жыйнак
-    justify-content: center; // Ортого жайгаштыруу
-    align-items: center; // Ортого вертикалдуу жайгаштыруу
-
-    input[type='number'], input[type='text'] {
-      padding: 15px 20px; // Ички жыйнак
-      border: none; // Чек жок
-      border-radius: 12px; // Бурчтарды тегиздөө
-      font-size: 16px; // Шрифт өлчөмү
-      background: rgba(255, 255, 255, 0.9); // Фон түсү
-      backdrop-filter: blur(10px); // Фонду булгалоо
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); // Көлөкө
-      transition: all 0.3s ease; // Өзгөрүү эффекттери
-      min-width: 200px; // Минимум туурасы
-
-      &:focus {
-        outline: none; // Чек жок
-        background: white; // Фон түсү
-        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15); // Көлөкө
-        transform: translateY(-2px); // Жогору жылдыруу
+      
+      &.active {
+        background: linear-gradient(135deg, #1e8449, #196f3d);
+        box-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
       }
     }
 
-    button {
-      background: linear-gradient(45deg, #667eea, #764ba2); // Градиент фон
-      color: white; // Текст түсү
-      border: none; // Чек жок
-      padding: 15px 30px; // Ички жыйнак
-      border-radius: 12px; // Бурчтарды тегиздөө
-      font-size: 16px; // Шрифт өлчөмү
-      font-weight: 600; // Шрифт калыңдыгы
-      cursor: pointer; // Курсор
-      transition: all 0.3s ease; // Өзгөрүү эффекттери
-
+    &.sauce {
+      background: linear-gradient(135deg, $warning-color, #d68910);
+      color: $white;
+      
       &:hover {
-        transform: translateY(-2px); // Жогору жылдыруу
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4); // Көлөкө
+        background: linear-gradient(135deg, #d68910, $warning-color);
+      }
+      
+      &.active {
+        background: linear-gradient(135deg, #b7950b, #a6881c);
+        box-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
       }
     }
   }
+}
 
-  .result-container {
-    background: rgba(255, 255, 255, 0.95); // Фон түсү
-    backdrop-filter: blur(20px); // Фонду булгалоо
-    border-radius: 20px; // Бурчтарды тегиздөө
-    padding: 30px; // Ички жыйнак
-    margin: 30px 0; // Жыйнактар
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); // Көлөкө
+// Input container
+.input-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  animation: fadeInUp 0.6s ease-out 0.5s both;
 
-    h2 {
-      color: #333; // Текст түсү
-      margin-bottom: 20px; // Төмөнкү жыйнак
-      font-size: 1.8rem; // Шрифт өлчөмү
-    }
+  input {
+    padding: 1rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    background: $white;
+    transition: all 0.3s ease;
+    min-width: 200px;
 
-    .table-container {
-      overflow-x: auto; // Горизонталдуу скролл
-      border-radius: 15px; // Бурчтарды тегиздөө
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); // Көлөкө
-    }
-
-    table {
-      width: 100%; // Толугу менен туурасы
-      border-collapse: collapse; // Чекти жоюу
-      background: white; // Фон түсү
-      border-radius: 15px; // Бурчтарды тегиздөө
-      overflow: hidden; // Чекти жоюу
-
-      thead {
-        background: linear-gradient(45deg, #667eea, #764ba2); // Градиент фон
-        color: white; // Текст түсү
-      }
-
-      th, td {
-        padding: 15px; // Ички жыйнак
-        text-align: left; // Сулуулук
-        border-bottom: 1px solid #eee; // Төмөнкү чек
-      }
+    &:focus {
+      outline: none;
+      border-color: $secondary-color;
+      box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
+      transform: scale(1.02);
     }
   }
 
-  @media (max-width: 768px) {
+  button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, $secondary-color, #2980b9);
+    color: $white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      background: linear-gradient(135deg, #2980b9, $secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &.calculating {
+      animation: pulse 1s infinite;
+      background: linear-gradient(135deg, $success-color, #229954);
+    }
+
+    &.button-animate {
+      animation: bounce 0.3s ease-out;
+    }
+  }
+}
+
+// Result container
+.result-container {
+  background: $white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.6s ease-out;
+
+  h2 {
+    color: $primary-color;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  h3 {
+    color: $primary-color;
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, $light-color, #d5dbdb);
+    border-radius: 8px;
+    animation: fadeInUp 0.5s ease-out 0.3s both;
+  }
+}
+
+// Table container
+.table-container {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: $white;
+
+    thead {
+      background: linear-gradient(135deg, $primary-color, $dark-color);
+      
+      th {
+        padding: 1.2rem;
+        color: $white;
+        font-weight: 600;
+        text-align: left;
+        font-size: 1.1rem;
+      }
+    }
+
+    tbody {
+      tr {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        animation: fadeInUp 0.4s ease-out both;
+
+        // Staggered animation for table rows
+        @for $i from 1 through 20 {
+          &:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.05}s;
+          }
+        }
+
+        &:hover {
+          background: rgba(52, 152, 219, 0.1) !important;
+          transform: scale(1.01);
+        }
+
+        &:nth-child(odd) {
+          background: rgba(236, 240, 241, 0.5);
+        }
+
+        td {
+          padding: 1rem 1.2rem;
+          border-bottom: 1px solid rgba(189, 195, 199, 0.3);
+          transition: all 0.3s ease;
+
+          &:first-child {
+            font-weight: 600;
+            color: $primary-color;
+          }
+
+          &:last-child {
+            color: $dark-color;
+            font-family: 'Courier New', monospace;
+          }
+        }
+
+        // Selected ingredient styling
+        &[style*="red"] {
+          background: linear-gradient(135deg, rgba(231, 76, 60, 0.9), rgba(192, 57, 43, 0.9)) !important;
+          color: $white !important;
+          animation: pulse 0.5s ease-in-out;
+
+          td {
+            color: $white !important;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .ingredient-calculator {
+    padding: 1rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
     .quick-select {
-      flex-direction: column; // Вертикалдуу тизмек
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+
+      button {
+        padding: 1rem;
+        font-size: 0.9rem;
+        height: 60px;
+      }
     }
 
     .input-container {
-      flex-direction: column; // Вертикалдуу тизмек
-      align-items: stretch; // Туурасы толук
-    }
+      flex-direction: column;
+      align-items: center;
 
-    input[type="number"], input[type="text"] {
-      min-width: 100%; // Туурасы толук
+      input {
+        min-width: auto;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      button {
+        width: 100%;
+        max-width: 300px;
+      }
     }
 
     .result-container {
-      padding: 20px; // Ички жыйнак
+      padding: 1rem;
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
     }
 
     .table-container {
-      overflow-x: auto; // Горизонталдуу скролл
+      table {
+        font-size: 0.9rem;
+
+        th, td {
+          padding: 0.8rem;
+        }
+      }
     }
   }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .ingredient-calculator {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  }
+}
+
+// Custom scrollbar
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: $light-color;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, $secondary-color, $primary-color);
+  border-radius: 4px;
+
+  &:hover {
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+  }
+}
+
+// Loading animation for calculating state
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.calculating::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }

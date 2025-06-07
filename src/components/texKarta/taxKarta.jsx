@@ -10,7 +10,8 @@ const TexKarta = () => {
     const [isCalculating, setIsCalculating] = useState(false);
     const [customPrices, setCustomPrices] = useState({});
     const [buttonClass, setButtonClass] = useState('');
-    const [selectedIngredients, setSelectedIngredients] = useState(new Set()); // Track selected ingredients
+    const [selectedIngredients, setSelectedIngredients] = useState(new Set());
+    const [showDishList, setShowDishList] = useState(true); // New state to control dish list visibility
 
     const quickSelectDishes = [
         { name: 'КурицаМаринад', category: 'main-dish' },
@@ -31,6 +32,17 @@ const TexKarta = () => {
 
     const handleDishSelect = (dish) => {
         setSelectedDish(dish);
+        setShowDishList(false); // Hide dish list after selection
+        setResult(null); // Clear previous results
+        setSelectedIngredients(new Set()); // Clear selected ingredients
+    };
+
+    const handleBackToMenu = () => {
+        setShowDishList(true); // Show dish list again
+        setSelectedDish('');
+        setResult(null);
+        setSelectedIngredients(new Set());
+        setMultiplier(1);
     };
 
     const handlePriceChange = (ingredient, price) => {
@@ -39,13 +51,13 @@ const TexKarta = () => {
 
     const calculateIngredients = () => {
         setIsCalculating(true);
-        setButtonClass('button-animate'); // Add animation class
+        setButtonClass('button-animate');
         const ingredients = ingredientsData[selectedDish];
 
         if (!ingredients) {
             alert('Блюдо не выбрано.');
             setIsCalculating(false);
-            setButtonClass(''); // Reset class
+            setButtonClass('');
             return;
         }
 
@@ -62,7 +74,7 @@ const TexKarta = () => {
         setTotalWeight(total);
         setTimeout(() => {
             setIsCalculating(false);
-            setButtonClass(''); // Reset class after calculation
+            setButtonClass('');
         }, 300);
     };
 
@@ -78,9 +90,9 @@ const TexKarta = () => {
         setSelectedIngredients((prev) => {
             const newSelection = new Set(prev);
             if (newSelection.has(ingredient)) {
-                newSelection.delete(ingredient); // Deselect if already selected
+                newSelection.delete(ingredient);
             } else {
-                newSelection.add(ingredient); // Select if not selected
+                newSelection.add(ingredient);
             }
             return newSelection;
         });
@@ -88,37 +100,59 @@ const TexKarta = () => {
 
     return (
         <div className='ingredient-calculator'>
-            <h1>Техкарта заготовок</h1>
-            <div className='quick-select'>
-                {quickSelectDishes.map(({ name, category }) => (
-                    <button
-                        key={name}
-                        onClick={() => handleDishSelect(name)}
-                        className={`dish-category ${category} ${selectedDish === name ? 'active' : ''}`}
-                    >
-                        {name}
+            <div className="header-section">
+                <h1>Техкарта заготовок</h1>
+                {!showDishList && (
+                    <button className="back-button" onClick={handleBackToMenu}>
+                        ← Назад к меню
                     </button>
-                ))}
+                )}
             </div>
 
-            <div className='input-container'>
-                <input
-                    type='number'
-                    placeholder='Коэффициент'
-                    value={multiplier}
-                    onChange={(e) => setMultiplier(e.target.value)}
-                />
-                <button
-                    onClick={calculateIngredients}
-                    className={`${isCalculating ? 'calculating' : ''} ${buttonClass}`}
-                >
-                    Рассчитать
-                </button>
-            </div>
+            {showDishList && (
+                <div className='quick-select'>
+                    {quickSelectDishes.map(({ name, category }) => (
+                        <button
+                            key={name}
+                            onClick={() => handleDishSelect(name)}
+                            className={`dish-category ${category}`}
+                        >
+                            {name}
+                        </button>
+                    ))}
+                </div>
+            )}
 
-            {result && (
+            {!showDishList && selectedDish && (
+                <div className='input-container'>
+                    <div className="selected-dish-display">
+                        <span className="dish-name">{selectedDish}</span>
+                        <button 
+                            className="clear-button" 
+                            onClick={handleBackToMenu}
+                            title="Очистить выбор"
+                        >
+                            ×
+                        </button>
+                    </div>
+                    <input
+                        type='number'
+                        placeholder='Коэффициент'
+                        value={multiplier}
+                        onChange={(e) => setMultiplier(e.target.value)}
+                    />
+                    <button
+                        onClick={calculateIngredients}
+                        className={`${isCalculating ? 'calculating' : ''} ${buttonClass}`}
+                    >
+                        Рассчитать
+                    </button>
+                </div>
+            )}
+
+            {result && !showDishList && (
                 <div className='result-container'>
-                    <h2>Результат:</h2>
+                    <h2>Результат для: {selectedDish}</h2>
                     <div className='table-container'>
                         <table>
                             <thead>
@@ -131,9 +165,9 @@ const TexKarta = () => {
                                 {Object.entries(result).map(([key, value]) => (
                                     <tr
                                         key={key}
-                                        onClick={() => toggleIngredientSelection(key)} // Toggle selection on click
+                                        onClick={() => toggleIngredientSelection(key)}
                                         style={{
-                                            backgroundColor: selectedIngredients.has(key) ? 'red' : 'transparent', // Highlight selected ingredients
+                                            backgroundColor: selectedIngredients.has(key) ? 'red' : 'transparent',
                                             cursor: 'pointer'
                                         }}
                                     >
