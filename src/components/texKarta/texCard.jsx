@@ -14,6 +14,8 @@ const TexCard = () => {
   const [newProduct, setNewProduct] = useState({ name: '', price: '' });
   const [editingProduct, setEditingProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showAllAddedMessage, setShowAllAddedMessage] = useState(false); // New state for completion message
+  const [showDishList, setShowDishList] = useState(true); // New state to control dish list visibility
 
   const quickSelectDishes = [
     { name: 'КурицаМаринат', category: 'main-dish' },
@@ -34,6 +36,19 @@ const TexCard = () => {
 
   const handleDishSelect = (dish) => {
     setSelectedDish(dish);
+    setShowDishList(false); // Hide dish list after selection
+    setSelectedIngredients(new Set()); // Clear selected ingredients when new dish is selected
+    setShowAllAddedMessage(false); // Reset completion message
+    setResult(null); // Clear previous results
+  };
+
+  const handleBackToMenu = () => {
+    setShowDishList(true); // Show dish list again
+    setSelectedDish('');
+    setResult(null);
+    setSelectedIngredients(new Set());
+    setMultiplier(1);
+    setShowAllAddedMessage(false); // Reset completion message
   };
 
   const calculateIngredients = () => {
@@ -59,6 +74,8 @@ const TexCard = () => {
 
     setResult(calculatedIngredients);
     setTotalWeight(total);
+    setSelectedIngredients(new Set()); // Clear selected ingredients on new calculation
+    setShowAllAddedMessage(false); // Reset completion message
     setTimeout(() => {
       setIsCalculating(false);
       setButtonClass('');
@@ -81,6 +98,19 @@ const TexCard = () => {
       } else {
         newSelection.add(ingredient);
       }
+      
+      // Check if all ingredients are selected after this change
+      const totalIngredients = result ? Object.keys(result).length : 0;
+      const selectedCount = newSelection.has(ingredient) ? newSelection.size : newSelection.size;
+      
+      if (selectedCount === totalIngredients && totalIngredients > 0) {
+        setShowAllAddedMessage(true);
+        // Hide message after 3 seconds
+        setTimeout(() => {
+          setShowAllAddedMessage(false);
+        }, 3000);
+      }
+      
       return newSelection;
     });
   };
@@ -127,37 +157,80 @@ const TexCard = () => {
 
   return (
     <div className='ingredient-calculator'>
-      <h1>Техкарта заготовок</h1>
-      <div className='quick-select'>
-        {quickSelectDishes.map(({ name, category }) => (
-          <button
-            key={name}
-            onClick={() => handleDishSelect(name)}
-            className={`dish-category ${category} ${selectedDish === name ? 'active' : ''}`}
-          >
-            {name}
+      <div className="header-section">
+        <h1>Техкарта заготовок</h1>
+        {!showDishList && (
+          <button className="back-button" onClick={handleBackToMenu}>
+            ← Назад к меню
           </button>
-        ))}
+        )}
       </div>
+      
+      {/* Completion message */}
+      {showAllAddedMessage && (
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#4CAF50',
+          color: 'white',
+          padding: '20px 40px',
+          borderRadius: '10px',
+          fontSize: '18px',
+          fontWeight: 'bold',
+          zIndex: 1000,
+          boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+          animation: 'fadeInOut 3s ease-in-out'
+        }}>
+          Все ингредиенты добавлены!
+        </div>
+      )}
 
-      <div className='input-container'>
-        <input
-          type='number'
-          placeholder='Коэффициент'
-          value={multiplier}
-          onChange={(e) => setMultiplier(e.target.value)}
-        />
-        <button
-          onClick={calculateIngredients}
-          className={`${isCalculating ? 'calculating' : ''} ${buttonClass}`}
-        >
-          Рассчитать
-        </button>
-      </div>
+      {showDishList && (
+        <div className='quick-select'>
+          {quickSelectDishes.map(({ name, category }) => (
+            <button
+              key={name}
+              onClick={() => handleDishSelect(name)}
+              className={`dish-category ${category}`}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
+      )}
 
-      {result && (
+      {!showDishList && selectedDish && (
+        <div className='input-container'>
+          <div className="selected-dish-display">
+            <span className="dish-name">{selectedDish}</span>
+            <button 
+              className="clear-button" 
+              onClick={handleBackToMenu}
+              title="Очистить выбор"
+            >
+              ×
+            </button>
+          </div>
+          <input
+            type='number'
+            placeholder='Коэффициент'
+            value={multiplier}
+            onChange={(e) => setMultiplier(e.target.value)}
+          />
+          <button
+            onClick={calculateIngredients}
+            className={`${isCalculating ? 'calculating' : ''} ${buttonClass}`}
+          >
+            Рассчитать
+          </button>
+        </div>
+      )}
+
+      {result && !showDishList && (
         <div className='result-container'>
-          <h2>Результат:</h2>
+          <h2>Результат для: {selectedDish}</h2>
           <div className='table-container'>
             <table>
               <thead>
@@ -174,8 +247,10 @@ const TexCard = () => {
                     key={key}
                     onClick={() => toggleIngredientSelection(key)}
                     style={{
-                      backgroundColor: selectedIngredients.has(key) ? 'red' : 'transparent',
+                      backgroundColor: selectedIngredients.has(key) ? '#f0f0f0' : 'transparent',
+                      boxShadow: selectedIngredients.has(key) ? '0 2px 8px rgba(0,0,0,0.2)' : 'none',
                       cursor: 'pointer',
+                      transition: 'all 0.2s ease'
                     }}
                   >
                     <td>{key}</td>
@@ -194,9 +269,11 @@ const TexCard = () => {
       )}
 
       {/* Button to show/hide product list */}
-      <button onClick={toggleProductList} className='show-products-button'>
-        {showProducts ? 'Скрыть продукты' : 'Показать продукты'}
-      </button>
+      {!showDishList && (
+        <button onClick={toggleProductList} className='show-products-button'>
+          {showProducts ? 'Скрыть продукты' : 'Показать продукты'}
+        </button>
+      )}
 
       {showProducts && (
         <div className='product-list'>
@@ -268,6 +345,69 @@ const TexCard = () => {
           )}
         </div>
       )}
+
+      <style jsx>{`
+        .header-section {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+        
+        .back-button {
+          background: #6c757d;
+          color: white;
+          border: none;
+          padding: 10px 15px;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+        }
+        
+        .back-button:hover {
+          background: #5a6268;
+        }
+        
+        .selected-dish-display {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: #f8f9fa;
+          padding: 10px 15px;
+          border-radius: 5px;
+          margin-bottom: 10px;
+        }
+        
+        .dish-name {
+          font-weight: bold;
+          color: #495057;
+        }
+        
+        .clear-button {
+          background: #dc3545;
+          color: white;
+          border: none;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .clear-button:hover {
+          background: #c82333;
+        }
+        
+        @keyframes fadeInOut {
+          0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+          20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
+      `}</style>
     </div>
   );
 };

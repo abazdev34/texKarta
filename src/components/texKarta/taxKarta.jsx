@@ -12,6 +12,7 @@ const TexKarta = () => {
     const [buttonClass, setButtonClass] = useState('');
     const [selectedIngredients, setSelectedIngredients] = useState(new Set());
     const [showDishList, setShowDishList] = useState(true); // New state to control dish list visibility
+    const [showAllAddedMessage, setShowAllAddedMessage] = useState(false); // New state for completion message
 
     const quickSelectDishes = [
         { name: 'КурицаМаринад', category: 'main-dish' },
@@ -35,6 +36,7 @@ const TexKarta = () => {
         setShowDishList(false); // Hide dish list after selection
         setResult(null); // Clear previous results
         setSelectedIngredients(new Set()); // Clear selected ingredients
+        setShowAllAddedMessage(false); // Reset completion message
     };
 
     const handleBackToMenu = () => {
@@ -43,6 +45,7 @@ const TexKarta = () => {
         setResult(null);
         setSelectedIngredients(new Set());
         setMultiplier(1);
+        setShowAllAddedMessage(false); // Reset completion message
     };
 
     const handlePriceChange = (ingredient, price) => {
@@ -94,6 +97,19 @@ const TexKarta = () => {
             } else {
                 newSelection.add(ingredient);
             }
+            
+            // Check if all ingredients are selected after this change
+            const totalIngredients = result ? Object.keys(result).length : 0;
+            const selectedCount = newSelection.has(ingredient) ? newSelection.size : newSelection.size;
+            
+            if (selectedCount === totalIngredients && totalIngredients > 0) {
+                setShowAllAddedMessage(true);
+                // Hide message after 3 seconds
+                setTimeout(() => {
+                    setShowAllAddedMessage(false);
+                }, 3000);
+            }
+            
             return newSelection;
         });
     };
@@ -108,6 +124,27 @@ const TexKarta = () => {
                     </button>
                 )}
             </div>
+
+            {/* Completion message */}
+            {showAllAddedMessage && (
+                <div style={{
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    backgroundColor: '#4CAF50',
+                    color: 'white',
+                    padding: '20px 40px',
+                    borderRadius: '10px',
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                    zIndex: 1000,
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                    animation: 'fadeInOut 3s ease-in-out'
+                }}>
+                    Все ингредиенты добавлены!
+                </div>
+            )}
 
             {showDishList && (
                 <div className='quick-select'>
@@ -167,8 +204,10 @@ const TexKarta = () => {
                                         key={key}
                                         onClick={() => toggleIngredientSelection(key)}
                                         style={{
-                                            backgroundColor: selectedIngredients.has(key) ? 'red' : 'transparent',
-                                            cursor: 'pointer'
+                                            backgroundColor: selectedIngredients.has(key) ? '#f0f0f0' : 'transparent',
+                                            boxShadow: selectedIngredients.has(key) ? '0 2px 8px rgba(0,0,0,0.2)' : 'none',
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s ease'
                                         }}
                                     >
                                         <td>{key}</td>
@@ -181,6 +220,15 @@ const TexKarta = () => {
                     <h3>Общий вес: {totalWeight.toFixed(3)} кг</h3>
                 </div>
             )}
+
+            <style jsx>{`
+                @keyframes fadeInOut {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                }
+            `}</style>
         </div>
     );
 };
