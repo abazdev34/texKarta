@@ -100,7 +100,7 @@ const TexKarta = () => {
             
             // Check if all ingredients are selected after this change
             const totalIngredients = result ? Object.keys(result).length : 0;
-            const selectedCount = newSelection.has(ingredient) ? newSelection.size : newSelection.size;
+            const selectedCount = newSelection.size;
             
             if (selectedCount === totalIngredients && totalIngredients > 0) {
                 setShowAllAddedMessage(true);
@@ -117,7 +117,7 @@ const TexKarta = () => {
     return (
         <div className='ingredient-calculator'>
             <div className="header-section">
-                <h1>Техкарта заготовок</h1>
+                <h1>Техническая карта заготовок</h1>
                 {!showDishList && (
                     <button className="back-button" onClick={handleBackToMenu}>
                         ← Назад к меню
@@ -194,6 +194,7 @@ const TexKarta = () => {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Статус</th>
                                     <th>Ингредиент</th>
                                     <th>Масса (кг)</th>
                                 </tr>
@@ -204,12 +205,19 @@ const TexKarta = () => {
                                         key={key}
                                         onClick={() => toggleIngredientSelection(key)}
                                         style={{
-                                            backgroundColor: selectedIngredients.has(key) ? '#f0f0f0' : 'transparent',
-                                            boxShadow: selectedIngredients.has(key) ? '0 2px 8px rgba(0,0,0,0.2)' : 'none',
+                                            backgroundColor: selectedIngredients.has(key) ? '#e8f5e8' : 'transparent',
                                             cursor: 'pointer',
                                             transition: 'all 0.2s ease'
                                         }}
                                     >
+                                        <td style={{
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                            fontWeight: 'bold',
+                                            color: selectedIngredients.has(key) ? '#4CAF50' : '#ccc'
+                                        }}>
+                                            {selectedIngredients.has(key) ? '✓' : '○'}
+                                        </td>
                                         <td>{key}</td>
                                         <td>{value.toFixed(5)}</td>
                                     </tr>
@@ -217,11 +225,98 @@ const TexKarta = () => {
                             </tbody>
                         </table>
                     </div>
-                    <h3>Общий вес: {totalWeight.toFixed(3)} кг</h3>
+                    <div style={{ 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center',
+                        marginTop: '20px',
+                        padding: '15px',
+                        backgroundColor: '#f8f9fa',
+                        borderRadius: '8px'
+                    }}>
+                        <h3 style={{ margin: 0 }}>Общий вес: {totalWeight.toFixed(3)} кг</h3>
+                        <div style={{ 
+                            fontSize: '14px', 
+                            color: '#666',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '10px'
+                        }}>
+                            <span>Добавлено: {selectedIngredients.size}/{Object.keys(result).length}</span>
+                            <div style={{
+                                width: '100px',
+                                height: '8px',
+                                backgroundColor: '#e0e0e0',
+                                borderRadius: '4px',
+                                overflow: 'hidden'
+                            }}>
+                                <div style={{
+                                    width: `${(selectedIngredients.size / Object.keys(result).length) * 100}%`,
+                                    height: '100%',
+                                    backgroundColor: '#4CAF50',
+                                    transition: 'width 0.3s ease'
+                                }}></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )}
 
             <style jsx>{`
+                .header-section {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+                
+                .back-button {
+                    background: #6c757d;
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 14px;
+                }
+                
+                .back-button:hover {
+                    background: #5a6268;
+                }
+                
+                .selected-dish-display {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    background: #f8f9fa;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    margin-bottom: 10px;
+                }
+                
+                .dish-name {
+                    font-weight: bold;
+                    color: #495057;
+                }
+                
+                .clear-button {
+                    background: #dc3545;
+                    color: white;
+                    border: none;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    font-size: 16px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+                .clear-button:hover {
+                    background: #c82333;
+                }
+
                 @keyframes fadeInOut {
                     0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
                     20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }

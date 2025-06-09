@@ -21,16 +21,16 @@ const TexCard = () => {
     { name: 'КурицаМаринат', category: 'main-dish' },
     { name: 'ФаршМаринат', category: 'main-dish' },
     { name: 'ПикоДеГайо', category: 'main-dish' },
-    { name: 'Фасолеваяпаста', category: 'sauce' },
+    { name: 'Фасолевая паста', category: 'sauce' },
     { name: 'Гуакамоле', category: 'sauce' },
     { name: 'СоусЧипотле', category: 'sauce' },
     { name: 'СоусТако', category: 'sauce' },
     { name: 'СоусСырныйTL', category: 'main-dish' },
-    { name: 'ОвошиЖаренные', category: 'main-dish' },
-    { name: 'СпециДляКурицы', category: 'side' }, 
-    { name: 'СпециДляФарши', category: 'side' },
+    { name: 'ОвощиЖареные', category: 'main-dish' },
+    { name: 'СпецииДляКурицы', category: 'side' }, 
+    { name: 'СпецииДляФарша', category: 'side' },
     { name: 'ДляСоусаЧипотле', category: 'side' },
-    { name: 'фасалВаренный', category: 'side' },
+    { name: 'ФасольВареная', category: 'side' },
     { name: 'ЧикенСлайдер', category: 'side' },
   ];
 
@@ -158,7 +158,7 @@ const TexCard = () => {
   return (
     <div className='ingredient-calculator'>
       <div className="header-section">
-        <h1>Техкарта заготовок</h1>
+        <h1>Техническая карта заготовок</h1>
         {!showDishList && (
           <button className="back-button" onClick={handleBackToMenu}>
             ← Назад к меню
@@ -263,7 +263,7 @@ const TexCard = () => {
             </table>
           </div>
           <div className='total-cost'>
-            <h3>Общая стоимость: {totalCost.toFixed(2)} рубиль</h3>
+            <h3>Общая стоимость: {totalCost.toFixed(2)} рублей</h3>
           </div>
         </div>
       )}
