@@ -76,14 +76,6 @@ const Timer = () => {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const increaseTime = () => {
-    setTimeLeft(prevTime => prevTime + 60);
-  };
-
-  const decreaseTime = () => {
-    setTimeLeft(prevTime => Math.max(prevTime - 60, 0));
-  };
-
   return (
     <div className="timer">
       <div className="timer__header">
@@ -94,8 +86,6 @@ const Timer = () => {
       </div>
 
       <div className="timer__controls">
-        <button onClick={increaseTime}>+1 мин</button>
-        <button onClick={decreaseTime}>-1 мин</button>
         <button
           className={`timer__button ${isRunning ? 'timer__button--disabled' : ''}`}
           onClick={() => setIsRunning(true)}
@@ -134,10 +124,13 @@ const Timer = () => {
                 timer__step
                 ${isCompleted ? 'timer__step--completed' : ''}
                 ${isActive ? 'timer__step--active' : ''}
-                ${timeLeft === 0 ? 'timer__step--finished' : ''} // Кызылга өзгөртүү
+                ${timeLeft === 0 && step.type === 'done' ? 'timer__step--finished' : ''} // Кызылга өзгөртүү
               `}
+              style={isCompleted ? {color: 'green'} : {}}
             >
-              <div className="timer__step-time">{step.time} мин</div>
+              <div className="timer__step-time">
+                {isCompleted ? '✓' : `${step.time} мин`}
+              </div>
               <div className="timer__step-action">{step.action}</div>
             </div>
           );
