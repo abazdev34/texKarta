@@ -9,6 +9,7 @@ import Timer from './components/fPasta/fTaimer.jsx'
 import SousTimer from './components/sous/idex.jsx'
 
 import TexCard from './components/texKarta/texCard.jsx'
+import WarehouseSystem from './components/texKarta/texMyso.jsx'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
     <Route path="/timer" element={<Timer/>} />
     <Route path="/Sous" element={<SousTimer />} />
     <Route path="/texCard" element={<TexCard />} />
+      <Route path="/WarehouseSystem" element={<WarehouseSystem/>} />
     
    
     

@@ -39,6 +39,7 @@ const Header = () => {
       <Link to="/ovoshi"><TimerIcon /> Овощи жареные</Link>
       <Link to="/timer"><TimerIcon /> Фасолевая паста</Link>
       <Link to="/Sous"><TimerIcon /> Соус</Link>
+        <Link to="/WarehouseSystem"><TimerIcon /> Склад</Link>
      
       {(isLaptop || showProduct) && (
         <>
