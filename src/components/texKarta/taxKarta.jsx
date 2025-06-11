@@ -8,7 +8,7 @@ const TexKarta = () => {
     const [totalWeight, setTotalWeight] = useState(0);
     const [multiplier, setMultiplier] = useState(1);
     const [isCalculating, setIsCalculating] = useState(false);
-    const [customPrices, setCustomPrices] = useState({});
+    // const [customPrices, setCustomPrices] = useState({});
     const [buttonClass, setButtonClass] = useState('');
     const [selectedIngredients, setSelectedIngredients] = useState(new Set());
     const [showDishList, setShowDishList] = useState(true); // New state to control dish list visibility
@@ -48,9 +48,9 @@ const TexKarta = () => {
         setShowAllAddedMessage(false); // Reset completion message
     };
 
-    const handlePriceChange = (ingredient, price) => {
-        setCustomPrices((prev) => ({ ...prev, [ingredient]: price }));
-    };
+    // const handlePriceChange = (ingredient, price) => {
+    //     setCustomPrices((prev) => ({ ...prev, [ingredient]: price }));
+    // };
 
     const calculateIngredients = () => {
         setIsCalculating(true);
@@ -81,13 +81,13 @@ const TexKarta = () => {
         }, 300);
     };
 
-    const calculateTotalCost = () => {
-        if (!result) return 0;
-        return Object.entries(result).reduce((total, [ingredient, weight]) => {
-            const price = customPrices[ingredient] || 0;
-            return total + price * weight;
-        }, 0);
-    };
+    // const calculateTotalCost = () => {
+    //     if (!result) return 0;
+    //     return Object.entries(result).reduce((total, [ingredient, weight]) => {
+    //         const price = customPrices[ingredient] || 0;
+    //         return total + price * weight;
+    //     }, 0);
+    // };
 
     const toggleIngredientSelection = (ingredient) => {
         setSelectedIngredients((prev) => {
@@ -262,68 +262,7 @@ const TexKarta = () => {
                 </div>
             )}
 
-            <style jsx>{`
-                .header-section {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 20px;
-                }
-                
-                .back-button {
-                    background: #6c757d;
-                    color: white;
-                    border: none;
-                    padding: 10px 15px;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    font-size: 14px;
-                }
-                
-                .back-button:hover {
-                    background: #5a6268;
-                }
-                
-                .selected-dish-display {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    background: #f8f9fa;
-                    padding: 10px 15px;
-                    border-radius: 5px;
-                    margin-bottom: 10px;
-                }
-                
-                .dish-name {
-                    font-weight: bold;
-                    color: #495057;
-                }
-                
-                .clear-button {
-                    background: #dc3545;
-                    color: white;
-                    border: none;
-                    width: 25px;
-                    height: 25px;
-                    border-radius: 50%;
-                    cursor: pointer;
-                    font-size: 16px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-                
-                .clear-button:hover {
-                    background: #c82333;
-                }
-
-                @keyframes fadeInOut {
-                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                }
-            `}</style>
+        
         </div>
     );
 };
