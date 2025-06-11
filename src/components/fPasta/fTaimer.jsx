@@ -9,7 +9,7 @@ const Timer = () => {
   const [activeStep, setActiveStep] = useState(null);
   const [isSoundEnabled, setSoundEnabled] = useState(true);
 
-  const beep = new Audio(beepSound); // Импорттолгон үн файлы
+  const beep = new Audio(beepSound); // Импорттолгон 
   const finishBeep = new Audio(finishSound); // Блюдо даяр болгондо ойнолуучу үн
 
   const steps = [
