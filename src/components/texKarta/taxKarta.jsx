@@ -17,6 +17,8 @@ const TexKarta = () => {
     const quickSelectDishes = [
         { name: 'КурицаМаринад', category: 'main-dish' },
         { name: 'специКурица', category: 'main-dish' },
+        { name: 'ГовядинаБарбакоа', category: 'main-dish' },
+        { name: 'соусГовядина', category: 'main-dish' },
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
         { name: 'пико', category: 'side' },
