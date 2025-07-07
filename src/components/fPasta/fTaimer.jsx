@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import mixSound from '../../assets/zvuk6.mp3';
-import doneSound from '../../assets/finish.mp3';
+
 const Timer = () => {
   const [timeLeft, setTimeLeft] = useState(15 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [activeStep, setActiveStep] = useState(null);
   const [isSoundEnabled, setSoundEnabled] = useState(true);
-  const [repetitions, setRepetitions] = useState(1); // Количество повторений
+  const [repetitions, setRepetitions] = useState(0); // Количество повторений
   const [currentRepetition, setCurrentRepetition] = useState(1); // Текущее повторение
   const [isCompleted, setIsCompleted] = useState(false); // Завершено ли все
 
