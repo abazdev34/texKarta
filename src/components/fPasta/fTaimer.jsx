@@ -5,13 +5,70 @@ const Timer = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [activeStep, setActiveStep] = useState(null);
   const [isSoundEnabled, setSoundEnabled] = useState(true);
-  const [repetitions, setRepetitions] = useState(0); // Количество повторений
-  const [currentRepetition, setCurrentRepetition] = useState(1); // Текущее повторение
-  const [isCompleted, setIsCompleted] = useState(false); // Завершено ли все
+  const [repetitions, setRepetitions] = useState(0);
+  const [currentRepetition, setCurrentRepetition] = useState(1);
+  const [isCompleted, setIsCompleted] = useState(false);
 
-  // Звуки (используем стандартные звуки браузера)
+  // Звуки с использованием HTML5 Audio API
   const playBeep = () => {
     if (isSoundEnabled) {
+      try {
+        // Создаем новый аудио объект для каждого воспроизведения
+        const audio = new Audio();
+        audio.src = '../../assets/zvuk6.mp3';
+        audio.volume = 0.3;
+        audio.loop = false; // Отключаем зацикливание
+        
+        // Воспроизводим звук минимум 5 секунд
+        audio.play().then(() => {
+          // Если файл короче 5 секунд, запускаем повторно
+          audio.addEventListener('ended', function repeatSound() {
+            const currentTime = Date.now();
+            const startTime = audio.startTime || currentTime;
+            audio.startTime = audio.startTime || currentTime;
+            
+            // Если прошло менее 5 секунд, запускаем снова
+            if (currentTime - startTime < 5000) {
+              audio.currentTime = 0;
+              audio.play().catch(e => console.log('Ошибка повтора звука:', e));
+            } else {
+              // Убираем слушатель после 5 секунд
+              audio.removeEventListener('ended', repeatSound);
+            }
+          });
+        }).catch(e => {
+          console.log('Ошибка воспроизведения звука этапа:', e);
+          // Fallback на Web Audio API если файл не загружается
+          playWebAudioBeep();
+        });
+      } catch (error) {
+        console.log('Ошибка создания аудио для этапа:', error);
+        playWebAudioBeep();
+      }
+    }
+  };
+
+  const playFinishSound = () => {
+    if (isSoundEnabled) {
+      try {
+        const audio = new Audio();
+        audio.src = '../../assets/finish.mp3';
+        audio.volume = 0.7;
+        audio.play().catch(e => {
+          console.log('Ошибка воспроизведения звука завершения:', e);
+          // Fallback на Web Audio API если файл не загружается
+          playWebAudioFinish();
+        });
+      } catch (error) {
+        console.log('Ошибка создания аудио для завершения:', error);
+        playWebAudioFinish();
+      }
+    }
+  };
+
+  // Fallback функции с Web Audio API
+  const playWebAudioBeep = () => {
+    try {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
@@ -24,12 +81,14 @@ const Timer = () => {
       gainNode.gain.value = 0.1;
       
       oscillator.start();
-      oscillator.stop(audioContext.currentTime + 0.2);
+      oscillator.stop(audioContext.currentTime + 5); // 5 секунд звука
+    } catch (error) {
+      console.log('Ошибка Web Audio API:', error);
     }
   };
 
-  const playFinishSound = () => {
-    if (isSoundEnabled) {
+  const playWebAudioFinish = () => {
+    try {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
@@ -43,6 +102,8 @@ const Timer = () => {
       
       oscillator.start();
       oscillator.stop(audioContext.currentTime + 0.5);
+    } catch (error) {
+      console.log('Ошибка Web Audio API:', error);
     }
   };
 
@@ -73,12 +134,12 @@ const Timer = () => {
         // Переход к следующему повторению
         setCurrentRepetition(prev => prev + 1);
         setTimeLeft(15 * 60);
-        playBeep();
+        playBeep(); // Звук при переходе к следующему повторению
       } else {
         // Все завершено
         setIsRunning(false);
         setIsCompleted(true);
-        playFinishSound();
+        playFinishSound(); // Звук завершения всех повторений
       }
     }
     return () => clearInterval(interval);
@@ -90,7 +151,7 @@ const Timer = () => {
 
     if (step && isRunning) {
       setActiveStep(step.type);
-      playBeep();
+      playBeep(); // Звук при каждом этапе готовки
       
       setTimeout(() => {
         setActiveStep(null);
