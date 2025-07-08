@@ -16,27 +16,8 @@ const Timer = () => {
         // Создаем новый аудио объект для каждого воспроизведения
         const audio = new Audio();
         audio.src = '../../assets/zvuk6.mp3';
-        audio.volume = 0.3;
-        audio.loop = false; // Отключаем зацикливание
-        
-        // Воспроизводим звук минимум 5 секунд
-        audio.play().then(() => {
-          // Если файл короче 5 секунд, запускаем повторно
-          audio.addEventListener('ended', function repeatSound() {
-            const currentTime = Date.now();
-            const startTime = audio.startTime || currentTime;
-            audio.startTime = audio.startTime || currentTime;
-            
-            // Если прошло менее 5 секунд, запускаем снова
-            if (currentTime - startTime < 5000) {
-              audio.currentTime = 0;
-              audio.play().catch(e => console.log('Ошибка повтора звука:', e));
-            } else {
-              // Убираем слушатель после 5 секунд
-              audio.removeEventListener('ended', repeatSound);
-            }
-          });
-        }).catch(e => {
+        audio.volume = 0.5;
+        audio.play().catch(e => {
           console.log('Ошибка воспроизведения звука этапа:', e);
           // Fallback на Web Audio API если файл не загружается
           playWebAudioBeep();
@@ -81,7 +62,7 @@ const Timer = () => {
       gainNode.gain.value = 0.1;
       
       oscillator.start();
-      oscillator.stop(audioContext.currentTime + 5); // 5 секунд звука
+      oscillator.stop(audioContext.currentTime + 0.2);
     } catch (error) {
       console.log('Ошибка Web Audio API:', error);
     }
