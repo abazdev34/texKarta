@@ -20,7 +20,7 @@ const SousTimer = () => {
         { time: 30.93, action: 'Добавьте 260 г соли', type: 'oil' },
         { time: 30.93, action: 'Добавьте 400 г масла', type: 'oil' },
         { time: 30.93, action: 'Добавьте 660 г томатной пасты', type: 'paste' },
-        { time: 30, action: 'Приготовьте пасту (3500 г) на плите', type: 'paste' },
+        { time: 30, action: 'Приготовьте пасту (2500 г) на плите', type: 'paste' },
         { time: 10, action: 'Добавьте 2200 г сыра моцарелла', type: 'water' },
         { time: 8, action: 'Добавьте 2200 г сыра моцарелла', type: 'salt' },
         { time: 6, action: 'Добавьте 2100 г сыра моцарелла', type: 'sriracha' },
