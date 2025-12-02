@@ -26,11 +26,13 @@ const TexKarta = () => {
         { name: 'рисЗапровка', category: 'side' },
         { name: 'соусТако', category: 'sauce' },
         { name: 'соусЧипотило', category: 'sauce' },
+        { name: 'СоусКоулСлоу', category: 'sauce' },
         { name: 'Маринад', category: 'sauce' },
         { name: 'фасолеваяпаста', category: 'sauce' },
         { name: 'фасалВаренный', category: 'sauce' },
         { name: 'Гуакамоле', category: 'sauce' },
         { name: 'соусСырный', category: 'sauce' },
+        { name: 'салатКоулСлоу', category: 'sauce' },
     ];
 
     const handleDishSelect = (dish) => {
