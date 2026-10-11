@@ -15,7 +15,7 @@ const TexKarta = () => {
     const [showAllAddedMessage, setShowAllAddedMessage] = useState(false); // New state for completion message
 
     const quickSelectDishes = [
-        { name: 'КурицаМаринад', category: 'main-dish' },
+        { name: ',', category: 'main-dish' },
         { name: 'специКурица', category: 'main-dish' },
        
      
