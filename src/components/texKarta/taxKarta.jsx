@@ -222,10 +222,10 @@ const TexKarta = () => {
                                             fontWeight: 'bold',
                                             color: selectedIngredients.has(key) ? '#4CAF50' : '#ccc'
                                         }}>
-                                            {selectedIngredients.has(key) ? '✓' : ''}
+                                            {selectedIngredients.has(key) ? '✓' : '0'}
                                         </td>
                                         <td>{key}</td>
-                                        <td>{value.toFixed(5)}</td>
+                                        <td>{value.toFixed(0)}</td>
                                     </tr>
                                 ))}
                             </tbody>
