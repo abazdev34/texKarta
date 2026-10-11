@@ -225,7 +225,7 @@ const TexKarta = () => {
                                             {selectedIngredients.has(key) ? '✓' : '0'}
                                         </td>
                                         <td>{key}</td>
-                                        <td>{value.toFixed(0)}</td>
+                                        <td>{value.toFixed(1)}</td>
                                     </tr>
                                 ))}
                             </tbody>
