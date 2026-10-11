@@ -240,7 +240,7 @@ const TexKarta = () => {
                         backgroundColor: '#f8f9fa',
                         borderRadius: '8px'
                     }}>
-                        <h3 style={{ margin: 0 }}>Общий вес: {totalWeight.toFixed(3)} кг</h3>
+                        <h3 style={{ margin: 0 }}>Общий вес: {totalWeight.toFixed(3)} г</h3>
                         <div style={{ 
                             fontSize: '14px', 
                             color: '#666',
