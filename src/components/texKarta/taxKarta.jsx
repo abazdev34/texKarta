@@ -17,22 +17,24 @@ const TexKarta = () => {
     const quickSelectDishes = [
         { name: 'КурицаМаринад', category: 'main-dish' },
         { name: 'специКурица', category: 'main-dish' },
-        { name: 'ГовядинаБарбакоа', category: 'main-dish' },
-        { name: 'соусГовядина', category: 'main-dish' },
+       
+     
         { name: 'фаршМариновый', category: 'main-dish' },
         { name: 'специФарш', category: 'main-dish' },
-        { name: 'пико', category: 'side' },
+        { name: 'СтирипсиКырляМаринад', category: 'main-dish' },
+        { name: 'СтирипсКырляПалировка', category: 'main-dish' },
         { name: 'овошиЖарыных', category: 'side' },
         { name: 'рисЗапровка', category: 'side' },
         { name: 'соусТако', category: 'sauce' },
         { name: 'соусЧипотило', category: 'sauce' },
         { name: 'СоусКоулСлоу', category: 'sauce' },
-        { name: 'Маринад', category: 'sauce' },
-        { name: 'фасолеваяпаста', category: 'sauce' },
-        { name: 'фасалВаренный', category: 'sauce' },
+        { name: 'маринадДляЧипотиль', category: 'sauce' },
+
+    
         { name: 'Гуакамоле', category: 'sauce' },
-        { name: 'соусСырный', category: 'sauce' },
+       
         { name: 'салатКоулСлоу', category: 'sauce' },
+        { name: 'фасольВареная', category: 'sauce' },
     ];
 
     const handleDishSelect = (dish) => {
