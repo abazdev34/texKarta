@@ -202,7 +202,7 @@ const TexKarta = () => {
                                 <tr>
                                     <th>Статус</th>
                                     <th>Ингредиент</th>
-                                    <th>Масса (кг)</th>
+                                    <th>Масса (г)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -222,7 +222,7 @@ const TexKarta = () => {
                                             fontWeight: 'bold',
                                             color: selectedIngredients.has(key) ? '#4CAF50' : '#ccc'
                                         }}>
-                                            {selectedIngredients.has(key) ? '✓' : '○'}
+                                            {selectedIngredients.has(key) ? '✓' : ''}
                                         </td>
                                         <td>{key}</td>
                                         <td>{value.toFixed(5)}</td>
